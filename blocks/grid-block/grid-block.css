@@ -2,4 +2,9 @@
 .grid-block{
     border: 1px red solid;
     margin-top: 50px;
+    display: grid;
+    row-gap: 20px;
+    column-gap: 18px;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(2,1fr);
 }
