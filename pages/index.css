@@ -10,7 +10,3 @@
 @import url(../blocks/card/card.css);
 /*Footer*/
 @import url(../blocks/footer/footer.css);
-
-section, header, div, footer,main{
-    /* border: 1px solid red; */
-}
