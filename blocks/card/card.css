@@ -1,0 +1,6 @@
+.card{
+    width: 282px;
+    height: 361px;
+    border: 1px red solid;
+    box-sizing: border-box;
+}
