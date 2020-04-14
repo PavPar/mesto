@@ -2,7 +2,8 @@
     grid-column: 2;
     grid-area: button;
     align-self: center;
-    justify-self: center;
+    justify-self: end;
     width: 21px;
     height: 18px;
+    margin-right: 18px;
 }
