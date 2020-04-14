@@ -1,0 +1,8 @@
+.card__button{
+    grid-column: 2;
+    grid-area: button;
+    align-self: center;
+    justify-self: center;
+    width: 21px;
+    height: 18px;
+}
