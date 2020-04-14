@@ -1,2 +1,12 @@
-.profile{
+@import url(./__avatar/profile__avatar.css);
+@import url(./__button/profile__button.css);
+@import url(./__button/_type/profile__button_type-add.css);
+@import url(./__button/_type/profile__button_type-edit.css);
+@import url(./__info/profile__info.css);
+@import url(./__title/profile__title.css);
+@import url(./__subtitle/profile__subtitle.css);
+
+.profile {
+    display: flex;
+    width: 100%;
 }
