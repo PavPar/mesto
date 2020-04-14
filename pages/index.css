@@ -9,3 +9,8 @@
 /*Footer*/
 @import url(../blocks/footer/footer.css);
 
+section, header, div, footer,main{
+    border: 1px solid red;
+    box-sizing: border-box;
+    width: 10px;
+}
