@@ -1,3 +1,6 @@
-.footer{
+@import url(./__copyright/footer__copyright.css);
+.footer {
     margin-top: 66px;
+    max-width: 882px;
+    width: 100%;
 }
