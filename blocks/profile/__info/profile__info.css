@@ -2,4 +2,6 @@
     margin-left: 30px;
     margin-top: 18px;
     align-self: center;
+    display: grid;
+    gap:16px;
 }
