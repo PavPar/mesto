@@ -6,6 +6,12 @@
     width: 100%;
 }
 
+@media screen and (max-width:1024px) {
+    .footer {
+        max-width: 582px;
+    }
+}
+
 @media screen and (max-width:768px) {
     .footer {
         margin-top: 48px;
