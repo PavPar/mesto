@@ -1,0 +1,8 @@
+.popup__button_type-exit {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    transform: rotate(45deg);
+    top: -40px;
+    left: 100%;
+}
