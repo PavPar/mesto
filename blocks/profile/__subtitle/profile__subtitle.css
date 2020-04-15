@@ -5,6 +5,12 @@
     grid-row: 2;
 }
 
+@media screen and (max-width: 1024px) {
+    .profile__subtitle {
+        text-align: center;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .profile__subtitle {
         font-size: 14px;
