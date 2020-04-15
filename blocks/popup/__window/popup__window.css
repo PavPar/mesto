@@ -13,3 +13,9 @@
     align-items: flex-start;
     color: black;
 }
+
+@media screen and (max-width:535px){
+    .popup__window{
+        max-width: calc(320px - (42px * 2));
+    }
+}
