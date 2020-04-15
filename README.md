@@ -6,5 +6,5 @@
 * Интерактивная страница с возможностью изменения заголовка
 * Popup окно
 
-##Ссылки
+## Ссылки
 * [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
