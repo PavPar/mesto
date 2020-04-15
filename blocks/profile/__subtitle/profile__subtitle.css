@@ -4,3 +4,12 @@
     grid-column: 1/2;
     grid-row: 2;
 }
+
+@media screen and (max-width: 768px) {
+    .profile__subtitle {
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        justify-self: end;
+    }
+}

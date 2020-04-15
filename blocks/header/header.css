@@ -6,3 +6,10 @@
     width: 100%;
     border-bottom: 1px solid #545454;
 }
+
+@media screen and (max-width:768px){
+    .header{
+        margin-top: 28px;
+        max-width: 320px;
+    }
+}
