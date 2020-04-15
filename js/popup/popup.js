@@ -1,5 +1,5 @@
 let popup = document.querySelector(".popup");
-let profile = document.querySelector(".profile");
+const profile = document.querySelector(".profile");
 
 let popup__button = {
     exit: popup.querySelector(".popup__button_type-exit"),
