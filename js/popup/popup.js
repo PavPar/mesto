@@ -7,8 +7,8 @@ let popup__button = {
 }
 
 let popup__input = {
-    name: popup.querySelector(".popup__input_type-name"),
-    job: popup.querySelector(".popup__input_type-job")
+    name: popup.querySelector(".popup__input_type_name"),
+    job: popup.querySelector(".popup__input_type_job")
 }
 
 let profile__button = {

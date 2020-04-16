@@ -2,8 +2,8 @@
 @import url(./__window/popup__window.css);
 @import url(./__title/popup__title.css);
 @import url(./__input/popup__input.css);
-@import url(./__input/_type/popup__input_type-job.css);
-@import url(./__input/_type/popup__input_type-name.css);
+@import url(./__input/_type/popup__input_type_job.css);
+@import url(./__input/_type/popup__input_type_name.css);
 @import url(./__button/popup__button.css);
 @import url(./__button/_type/popup__button_type_exit.css);
 @import url(./__button/_type/popup__button_type_save.css);
