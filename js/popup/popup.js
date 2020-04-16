@@ -1,21 +1,21 @@
-let popup = document.querySelector(".popup");
+const popup = document.querySelector(".popup");
 const profile = document.querySelector(".profile");
 
-let popup__button = {
+const popup__button = {
     exit: popup.querySelector(".popup__button_type_exit"),
     save: popup.querySelector(".popup__button_type_save")
 }
 
-let popup__input = {
+const popup__input = {
     name: popup.querySelector(".popup__input_type_name"),
     job: popup.querySelector(".popup__input_type_job")
 }
 
-let profile__button = {
+const profile__button = {
     edit: profile.querySelector(".profile__button_type_edit")
 }
 
-let profile__data = {
+const profile__data = {
     name: profile.querySelector(".profile__title"),
     job: profile.querySelector(".profile__subtitle")
 }
