@@ -2,8 +2,8 @@ let popup = document.querySelector(".popup");
 const profile = document.querySelector(".profile");
 
 let popup__button = {
-    exit: popup.querySelector(".popup__button_type-exit"),
-    save: popup.querySelector(".popup__button_type-save")
+    exit: popup.querySelector(".popup__button_type_exit"),
+    save: popup.querySelector(".popup__button_type_save")
 }
 
 let popup__input = {
@@ -12,7 +12,7 @@ let popup__input = {
 }
 
 let profile__button = {
-    edit: profile.querySelector(".profile__button_type-edit")
+    edit: profile.querySelector(".profile__button_type_edit")
 }
 
 let profile__data = {

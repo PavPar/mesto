@@ -3,6 +3,8 @@
     line-height: 22px;
     grid-column: 1/2;
     grid-row: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 1024px) {

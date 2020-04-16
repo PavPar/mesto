@@ -4,6 +4,8 @@
     line-height: 56px;
     grid-column: 1;
     grid-row: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width:768px) {

@@ -5,8 +5,8 @@
 @import url(./__input/_type/popup__input_type-job.css);
 @import url(./__input/_type/popup__input_type-name.css);
 @import url(./__button/popup__button.css);
-@import url(./__button/_type/popup__button_type-exit.css);
-@import url(./__button/_type/popup__button_type-save.css);
+@import url(./__button/_type/popup__button_type_exit.css);
+@import url(./__button/_type/popup__button_type_save.css);
 .popup {
     position: fixed;
     width: 100%;

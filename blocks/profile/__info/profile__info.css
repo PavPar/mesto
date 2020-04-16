@@ -4,6 +4,8 @@
     align-self: center;
     display: grid;
     gap: 16px;
+    max-width: 336px;
+    white-space: nowrap;
 }
 
 @media screen and (max-width:768px) {
@@ -12,5 +14,6 @@
         margin-top: 10px;
         column-gap: 10px;
         row-gap: 0;
+        max-width: 280px;
     }
 }
