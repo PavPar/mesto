@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: unset;
-    background-image: url(../../../../images/card__button.svg);
+    background-image: url("../../../images/card__button.svg");
     background-size: 20px 18px;
     border: 0;
 }
