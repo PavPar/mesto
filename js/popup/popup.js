@@ -22,14 +22,12 @@ let profile__data = {
 
 function showPopup() {
     popup.classList.add("popup_status-opened");
-    popup.style.display = "block";
     popup__input.name.setAttribute('value',profile__data.name.textContent);
     popup__input.job.setAttribute('value',profile__data.job.textContent);    
 }
 
 function hidePopup() {
     popup.classList.remove("popup_status-opened");
-    popup.style.display = "none";
 }
 
 function setData(e){

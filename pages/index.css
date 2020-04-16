@@ -12,3 +12,6 @@
 @import url(../blocks/footer/footer.css);
 /* Popup */
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_status/popup_status-opened.css);
+
+
