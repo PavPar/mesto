@@ -44,6 +44,6 @@ function CreateCardPopup(title = "popup_title",input_1="", input_2 = "", btn_sav
 function DeletePopup(e) {
     e.preventDefault();
     if (e.target.classList.contains('popup__button_type_exit')) {
-        page.removeChild(e.target.parentNode);
+        document.querySelector('.popup').remove();
     }
 }

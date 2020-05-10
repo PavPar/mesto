@@ -12,7 +12,7 @@ function setData(e) {
     const currPopup = page.querySelector('.popup__window');
     profile.querySelector(".profile__title").textContent = currPopup.querySelectorAll(".popup__input")[0].value;
     profile.querySelector(".profile__subtitle").textContent = currPopup.querySelectorAll(".popup__input")[1].value;
-    page.removeChild(currPopup);
+    document.querySelector('.popup').remove();
 }
 
 profile_content.btn_edit.addEventListener("click", () => {
@@ -24,7 +24,7 @@ profile_content.btn_add.addEventListener("click", () => {
         e.preventDefault();
         const currPopup = page.querySelector('.popup__window');
         createCard(currPopup.querySelectorAll(".popup__input")[0].value, currPopup.querySelectorAll(".popup__input")[1].value,true)
-        page.removeChild(currPopup);
+        document.querySelector('.popup').remove();
     })
 });
 

@@ -1,5 +1,5 @@
 .popup__window {
-    position: fixed;
+    position: relative;
     width: 100%;
     max-width: 430px;
     max-height: 330px;
