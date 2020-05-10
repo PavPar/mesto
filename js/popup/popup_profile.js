@@ -1,29 +1,24 @@
 const popup = document.querySelector(".popup");
 const profile = document.querySelector(".profile");
 
-const popup__button = {
-    exit: popup.querySelector(".popup__button_type_exit"),
-    save: popup.querySelector(".popup__button_type_save")
+
+const popup_content = {
+    btn_exit: popup.querySelector(".popup__button_type_exit"),
+    btn_save: popup.querySelector(".popup__button_type_save"),
+    input_name: popup.querySelectorAll(".popup__input")[0],
+    input_job: popup.querySelectorAll(".popup__input")[1]
 }
 
-const popup__input = {
-    name: popup.querySelectorAll(".popup__input")[0],
-    job: popup.querySelectorAll(".popup__input")[1]
-}
-
-const profile__button = {
-    edit: profile.querySelector(".profile__button_type_edit")
-}
-
-const profile__data = {
-    name: profile.querySelector(".profile__title"),
-    job: profile.querySelector(".profile__subtitle")
+const profile_content = {
+    btn_edit: profile.querySelector(".profile__button_type_edit"),
+    title: profile.querySelector(".profile__title"),
+    subtitle: profile.querySelector(".profile__subtitle")
 }
 
 function showPopup() {
     popup.classList.add("popup_status-opened");
-    popup__input.name.setAttribute('value',profile__data.name.textContent);
-    popup__input.job.setAttribute('value',profile__data.job.textContent);    
+    popup_content.input_name.setAttribute('value',profile_content.title.textContent);
+    popup_content.input_job.setAttribute('value',profile_content.subtitle.textContent);    
 }
 
 function hidePopup() {
@@ -32,11 +27,11 @@ function hidePopup() {
 
 function setData(e){
     e.preventDefault();
-    profile__data.name.textContent = popup__input.name.value;
-    profile__data.job.textContent = popup__input.job.value;
+    profile_content.title.textContent = popup_content.input_name.value;
+    profile_content.subtitle.textContent = popup_content.input_job.value;
     hidePopup();
 }
 
-profile__button.edit.addEventListener("click", showPopup);
-popup__button.exit.addEventListener("click", hidePopup);
-popup__button.save.addEventListener("click",setData);
+profile_content.btn_edit.addEventListener("click", showPopup);
+popup_content.btn_exit.addEventListener("click", hidePopup);
+popup_content.btn_save.addEventListener("click",setData);
