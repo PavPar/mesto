@@ -1,5 +1,5 @@
 .popup__window {
-    position: relative;
+    position: fixed;
     width: 100%;
     max-width: 430px;
     max-height: 330px;
@@ -13,10 +13,11 @@
     flex-direction: column;
     align-items: flex-start;
     color: black;
+    z-index: 3;
 }
 
-@media screen and (max-width:535px){
-    .popup__window{
+@media screen and (max-width:535px) {
+    .popup__window {
         max-width: calc(320px - (42px * 2));
     }
 }

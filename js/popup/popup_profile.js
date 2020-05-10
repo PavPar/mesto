@@ -1,12 +1,11 @@
 const popup = document.querySelector(".popup");
 const profile = document.querySelector(".profile");
 
-
 const popup_content = {
     btn_exit: popup.querySelector(".popup__button_type_exit"),
     btn_save: popup.querySelector(".popup__button_type_save"),
-    input_name: popup.querySelectorAll(".popup__input")[0],
-    input_job: popup.querySelectorAll(".popup__input")[1]
+    input_1: popup.querySelectorAll(".popup__input")[0],
+    input_2: popup.querySelectorAll(".popup__input")[1]
 }
 
 const profile_content = {
@@ -17,8 +16,8 @@ const profile_content = {
 
 function showPopup() {
     popup.classList.add("popup_status-opened");
-    popup_content.input_name.setAttribute('value',profile_content.title.textContent);
-    popup_content.input_job.setAttribute('value',profile_content.subtitle.textContent);    
+    popup_content.input_1.setAttribute('value',profile_content.title.textContent);
+    popup_content.input_2.setAttribute('value',profile_content.subtitle.textContent);    
 }
 
 function hidePopup() {
@@ -27,8 +26,8 @@ function hidePopup() {
 
 function setData(e){
     e.preventDefault();
-    profile_content.title.textContent = popup_content.input_name.value;
-    profile_content.subtitle.textContent = popup_content.input_job.value;
+    profile_content.title.textContent = popup_content.input_1.value;
+    profile_content.subtitle.textContent = popup_content.input_2.value;
     hidePopup();
 }
 
