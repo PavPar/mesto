@@ -23,46 +23,7 @@
             </div>
             <input type="button" class="profile__button profile__button_type_add">
         </section>
-        <section class="cards">
-
-            <div class="card">
-                <img class="card__image" src="./images/card__karachaevsk.png" alt="Карачаево- Черкесия">
-                <h2 class="card__title">Карачаево- Черкесия</h2>
-                <input type="button" class="card__button">
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/card__Mountain-Elbrus.png" alt="Гора Эльбрус">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <input type="button" class="card__button">
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/card__Dombai.png" alt="Домбай">
-                <h2 class="card__title">Домбай</h2>
-                <input type="button" class="card__button">
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/card__Mountain-Elbrus.png" alt="Гора Эльбрус">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <input type="button" class="card__button">
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/card__Dombai.png" alt="Домбай">
-                <h2 class="card__title">Домбай</h2>
-                <input type="button" class="card__button">
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/card__karachaevsk.png" alt="Карачаево- Черкесия">
-                <h2 class="card__title">Карачаево- Черкесия</h2>
-                <input type="button" class="card__button">
-            </div>
-
-
-        </section>
+        <section class="cards"></section>
     </main>
 
     <section class="popup">
@@ -82,7 +43,15 @@
         <h2 class="footer__copyright">© 2020 Mesto Russia</h2>
     </footer>
 
+    <template id="card-template">
+        <div class="card">
+            <img class="card__image">
+            <h2 class="card__title"></h2>
+            <input type="button" class="card__button">
+        </div>
+    </template>
     <script src="./js/popup/popup.js"></script>
+    <script src="./js/popup/dynamicCards.js"></script>
 
 </body>
 
