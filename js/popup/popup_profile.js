@@ -7,8 +7,8 @@ const popup__button = {
 }
 
 const popup__input = {
-    name: popup.querySelector(".popup__input_type_name"),
-    job: popup.querySelector(".popup__input_type_job")
+    name: popup.querySelectorAll(".popup__input")[0],
+    job: popup.querySelectorAll(".popup__input")[1]
 }
 
 const profile__button = {
