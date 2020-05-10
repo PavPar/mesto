@@ -57,8 +57,3 @@ initialCards.forEach((element)=>{
     createCard(element.title,element.src);
 });
 
-
-btn_createCard.addEventListener('click', (e) => {
-    createCard("test", 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
-})
-

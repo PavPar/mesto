@@ -1,36 +1,30 @@
-const popup = document.querySelector(".popup");
 const profile = document.querySelector(".profile");
-
-const popup_content = {
-    btn_exit: popup.querySelector(".popup__button_type_exit"),
-    btn_save: popup.querySelector(".popup__button_type_save"),
-    input_1: popup.querySelectorAll(".popup__input")[0],
-    input_2: popup.querySelectorAll(".popup__input")[1]
-}
 
 const profile_content = {
     btn_edit: profile.querySelector(".profile__button_type_edit"),
+    btn_add: profile.querySelector(".profile__button_type_add"),
     title: profile.querySelector(".profile__title"),
     subtitle: profile.querySelector(".profile__subtitle")
 }
 
-function showPopup() {
-    popup.classList.add("popup_status-opened");
-    popup_content.input_1.setAttribute('value',profile_content.title.textContent);
-    popup_content.input_2.setAttribute('value',profile_content.subtitle.textContent);    
-}
-
-function hidePopup() {
-    popup.classList.remove("popup_status-opened");
-}
-
 function setData(e){
     e.preventDefault();
-    profile_content.title.textContent = popup_content.input_1.value;
-    profile_content.subtitle.textContent = popup_content.input_2.value;
-    hidePopup();
+    const currPopup = page.querySelector('.popup__window');
+    profile.querySelector(".profile__title").textContent = currPopup.querySelectorAll(".popup__input")[0].value;
+    profile.querySelector(".profile__subtitle").textContent = currPopup.querySelectorAll(".popup__input")[1].value;
+    page.removeChild(currPopup);
 }
 
-profile_content.btn_edit.addEventListener("click", showPopup);
-popup_content.btn_exit.addEventListener("click", hidePopup);
-popup_content.btn_save.addEventListener("click",setData);
+profile_content.btn_edit.addEventListener("click", () =>{
+    CreatePopup("Редактировать профиль",profile_content.title.textContent,profile_content.subtitle.textContent,undefined,setData)
+});
+
+profile_content.btn_add.addEventListener("click", () =>{
+    CreatePopup("Создать карточку",undefined,undefined,undefined,(e)=>{
+        e.preventDefault();
+        const currPopup = page.querySelector('.popup__window');
+        createCard(currPopup.querySelectorAll(".popup__input")[0].value,currPopup.querySelectorAll(".popup__input")[1].value)
+        page.removeChild(currPopup);
+    })
+});
+
