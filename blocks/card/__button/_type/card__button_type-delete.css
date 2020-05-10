@@ -1,0 +1,10 @@
+.card__button_type-delete{
+    position:absolute;
+    top:18px;
+    right: 15px;
+    z-index: 2;
+    background-image: url("../../../../images/bin.svg");
+    background-size: 18px 19px;
+    width: 21px;
+    height: 18px;
+}

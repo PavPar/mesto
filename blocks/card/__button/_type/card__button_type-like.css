@@ -1,0 +1,11 @@
+.card__button_type-like{
+    grid-column: 2;
+    grid-area: button;
+    align-self: center;
+    justify-self: end;
+    margin-right: 18px;
+    background-image: url("../../../../images/card__button.svg");
+    background-size: 20px 18px;
+    width: 21px;
+    height: 18px;
+}

@@ -30,18 +30,28 @@ const initialCards = [
 ];
 
 
-btn_createCard.addEventListener('click', (e) => {
-    // createCard("test", 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
-})
-
 function createCard(title, imageLink, alt = title) {
     const newCard = card_template.content.cloneNode(true).querySelector(".card");
+
     newCard.querySelector('.card__title').textContent = title;
     newCard.querySelector('.card__image').setAttribute('src',imageLink);
     newCard.querySelector('.card__image').setAttribute('alt',alt);
+    newCard.querySelector('.card__button_type-like').addEventListener('click',(e)=>{
+        if(event.target.classList.contains('card__button_type-like')){
+            event.target.classList.toggle('card__button_state-selected');
+        }
+    })
+    
     cards_area.append(newCard);
 }
+
 
 initialCards.forEach((element)=>{
     createCard(element.title,element.src);
 });
+
+
+btn_createCard.addEventListener('click', (e) => {
+    // createCard("test", 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
+})
+

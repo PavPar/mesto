@@ -1,9 +1,13 @@
 @import url(./__title/card__title.css);
 @import url(./__image/card__image.css);
 @import url(./__button/card__button.css);
+@import url(./__button/_type/card__button_type-like.css);
+@import url(./__button/_type/card__button_type-delete.css);
+@import url(./__button/_state/card__button_state-selected.css);
+
 .card {
+    position: relative;
     width: 282px;
-    /* height: 361px; */
     box-sizing: border-box;
     background: #FFFFFF;
     border-radius: 10px;

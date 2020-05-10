@@ -1,16 +1,12 @@
-.card__button{
-    grid-column: 2;
-    grid-area: button;
-    align-self: center;
-    justify-self: end;
-    width: 21px;
-    height: 18px;
-    margin-right: 18px;
+.card__button {
     box-sizing: border-box;
     background-repeat: no-repeat;
     background-position: center;
     background-color: unset;
-    background-image: url("../../../images/card__button.svg");
-    background-size: 20px 18px;
     border: 0;
+    transition: opacity .5s ease-out;
+}
+
+.card__button:hover{
+    opacity: .8;
 }

@@ -3,4 +3,5 @@
     height: 282px;
     grid-column: 1/2;
     grid-area: image;
+    filter: brightness(80%);
 }
