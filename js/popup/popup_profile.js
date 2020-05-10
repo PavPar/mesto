@@ -7,7 +7,7 @@ const profile_content = {
     subtitle: profile.querySelector(".profile__subtitle")
 }
 
-function setData(e){
+function setData(e) {
     e.preventDefault();
     const currPopup = page.querySelector('.popup__window');
     profile.querySelector(".profile__title").textContent = currPopup.querySelectorAll(".popup__input")[0].value;
@@ -15,15 +15,15 @@ function setData(e){
     page.removeChild(currPopup);
 }
 
-profile_content.btn_edit.addEventListener("click", () =>{
-    CreatePopup("Редактировать профиль",profile_content.title.textContent,profile_content.subtitle.textContent,undefined,setData)
+profile_content.btn_edit.addEventListener("click", () => {
+    CreatePopup("Редактировать профиль", profile_content.title.textContent, profile_content.subtitle.textContent, setData)
 });
 
-profile_content.btn_add.addEventListener("click", () =>{
-    CreatePopup("Создать карточку",undefined,undefined,undefined,(e)=>{
+profile_content.btn_add.addEventListener("click", () => {
+    CreateCardPopup("Создать карточку", "Название", "Ссылка на картинку", (e) => {
         e.preventDefault();
         const currPopup = page.querySelector('.popup__window');
-        createCard(currPopup.querySelectorAll(".popup__input")[0].value,currPopup.querySelectorAll(".popup__input")[1].value)
+        createCard(currPopup.querySelectorAll(".popup__input")[0].value, currPopup.querySelectorAll(".popup__input")[1].value,true)
         page.removeChild(currPopup);
     })
 });

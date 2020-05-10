@@ -1,6 +1,5 @@
 const cards_area = document.querySelector(".cards");
 const card_template = document.querySelector("#card-template");
-const btn_createCard = document.querySelector(".profile__button_type_add");
 
 const initialCards = [
     {
@@ -30,7 +29,7 @@ const initialCards = [
 ];
 
 
-function createCard(title, imageLink, alt = title) {
+function createCard(title, imageLink,reverse=false, alt = title) {
     const newCard = card_template.content.cloneNode(true).querySelector(".card");
 
     newCard.querySelector('.card__title').textContent = title;
@@ -49,7 +48,7 @@ function createCard(title, imageLink, alt = title) {
         }
     })
 
-    cards_area.append(newCard);
+    reverse?cards_area.insertBefore(newCard,cards_area.firstChild):cards_area.appendChild(newCard);
 }
 
 
