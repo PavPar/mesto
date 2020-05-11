@@ -15,16 +15,17 @@ function setData(e) {
     document.querySelector('.popup').remove();
 }
 
+function setCardData(e) {
+    e.preventDefault();
+    const currPopup = page.querySelector('.popup__window');
+    createCard(currPopup.querySelectorAll(".popup__input")[0].value, currPopup.querySelectorAll(".popup__input")[1].value, true)
+    document.querySelector('.popup').remove();
+}
 profile_content.btn_edit.addEventListener("click", () => {
-    CreatePopup("Редактировать профиль", profile_content.title.textContent, profile_content.subtitle.textContent, setData)
+    CreatePopup("Редактировать профиль", profile_content.title.textContent, profile_content.subtitle.textContent, setData, true)
 });
 
 profile_content.btn_add.addEventListener("click", () => {
-    CreateCardPopup("Создать карточку", "Название", "Ссылка на картинку", (e) => {
-        e.preventDefault();
-        const currPopup = page.querySelector('.popup__window');
-        createCard(currPopup.querySelectorAll(".popup__input")[0].value, currPopup.querySelectorAll(".popup__input")[1].value,true)
-        document.querySelector('.popup').remove();
-    })
+    CreatePopup("Создать карточку", "Название", "Ссылка на картинку", setCardData);
 });
 

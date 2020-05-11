@@ -26,23 +26,13 @@
         <section class="cards"></section>
     </main>
 
-    <!-- <section class="popup">
-        <form class="popup__window">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__input" type="text" required>
-            <input class="popup__input" type="text" required>
-            <input class="popup__button popup__button_type_save" type="submit" value="Сохранить">
-            <input type="button" class="popup__button popup__button_type_exit">
-        </form>
-    </section> -->
-
     <footer class="footer">
         <h2 class="footer__copyright">© 2020 Mesto Russia</h2>
     </footer>
 
     <template id="card-template">
         <div class="card">
-            <img class="card__image">
+            <img draggable="false" class="card__image">
             <h2 class="card__title"></h2>
             <input type="button" class="card__button card__button_type-like">
             <input type="button" class="card__button card__button_type-delete">
@@ -61,6 +51,18 @@
         </section>
     </template>
 
+    <section class="popup">
+        <div class="popup__window popup__window_size-big">
+            <input type="button" class="popup__button popup__button_type_exit">
+            <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" alt="">
+            <p class="popup__subtitle"></p>
+        </div>
+    </section>
+    <template id="#imageZoomPopup">
+        <section class="popup">
+            <input type="button" class="popup__button popup__button_type_exit">
+        </section>
+    </template>
     <script src="./js/popup/popup.js"></script>
     <script src="./js/dynamicCards/dynamicCards.js"></script>
     <script src="./js/popup/popup_profile.js"></script>

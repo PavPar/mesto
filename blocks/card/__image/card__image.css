@@ -4,4 +4,7 @@
     grid-column: 1/2;
     grid-area: image;
     filter: brightness(80%);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
