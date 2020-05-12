@@ -36,6 +36,8 @@ function createCard(title, imageLink,reverse=false, alt = title) {
     newCard.querySelector('.card__image').setAttribute('src',imageLink);
     newCard.querySelector('.card__image').setAttribute('alt',alt);
     
+    newCard.querySelector('.card__image').addEventListener('click',()=>createZoomImage(newCard.querySelector('.card__image')))
+
     newCard.querySelector('.card__button_type-like').addEventListener('click',(e)=>{
         if(event.target.classList.contains('card__button_type-like')){
             event.target.classList.toggle('card__button_state-selected');

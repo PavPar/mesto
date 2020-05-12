@@ -51,22 +51,21 @@
         </section>
     </template>
 
-    <section class="popup">
-        <div class="popup__window popup__window_size-big">
-            <input type="button" class="popup__button popup__button_type_exit">
-            <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" alt="">
-            <p class="popup__subtitle"></p>
-        </div>
-    </section>
-    <template id="#imageZoomPopup">
-        <section class="popup">
-            <input type="button" class="popup__button popup__button_type_exit">
+    <template id="imageZoom">
+        <section class="image-zoom">
+            <div class="image-zoom__container">
+                <img class="image-zoom__image"
+                    src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg">
+                <input type="button" class="image-zoom__btn image-zoom__btn_type-exit">
+                <h2 class="image-zoom__title"></h2>
+            </div>
         </section>
     </template>
+
     <script src="./js/popup/popup.js"></script>
+    <script src="./js/imageZoom/imageZoom.js"></script>
     <script src="./js/dynamicCards/dynamicCards.js"></script>
     <script src="./js/popup/popup_profile.js"></script>
-
 </body>
 
 </html>

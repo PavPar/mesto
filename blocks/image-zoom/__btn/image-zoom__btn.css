@@ -1,0 +1,7 @@
+.image-zoom__btn{
+    transition: opacity .2s ease-out;
+}
+
+.image-zoom__btn:hover{
+    opacity: .6;
+}
