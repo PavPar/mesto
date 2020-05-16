@@ -10,10 +10,6 @@ const profileContent = {
     subtitle: profile.querySelector(".profile__subtitle")
 }
 
-
-
-
-//----------------
 const popup = document.querySelector('.popup'); //Получаем PopUp на странице
 
 const popupContent = {
@@ -81,10 +77,11 @@ function createCard(title, imageLink, reverse = false, alt = title) {
     const newCard = cardTemplate.content.cloneNode(true).querySelector(".card");
 
     newCard.querySelector('.card__title').textContent = title;
-    newCard.querySelector('.card__image').setAttribute('src', imageLink);
-    newCard.querySelector('.card__image').setAttribute('alt', alt);
-
-    newCard.querySelector('.card__image').addEventListener('click', zoomImage)
+    
+    const image = newCard.querySelector('.card__image');
+    image.setAttribute('src', imageLink);
+    image.setAttribute('alt', alt);
+    image.addEventListener('click', zoomImage)
 
     newCard.querySelector('.card__button_type-like').addEventListener('click', (event) => {
         if (event.target.classList.contains('card__button_type-like')) {
@@ -194,7 +191,5 @@ initialCards.forEach((element) => {
     appendCard(createCard(element.title, element.src));
 });
 
-imageZoom.classList.remove("image-zoom_visibility-invisible");
-popup.classList.remove("image-zoom_visibility-invisible");
 profileContent.btnEdit.addEventListener("click", createProfilePopup);
 profileContent.btnAdd.addEventListener("click",createCardPopup);
