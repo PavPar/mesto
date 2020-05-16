@@ -16,3 +16,6 @@
 /* Image zoom */
 @import url(../blocks/image-zoom/image-zoom.css);
 @import url(../blocks/image-zoom/_visibility/image-zoom_visibility-hidden.css);
+/* Animations */
+@import url(../animations/fade-in.css);
+@import url(../animations/fade-out.css);

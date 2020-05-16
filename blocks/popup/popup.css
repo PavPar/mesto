@@ -13,14 +13,3 @@
     animation: fade-in .5s linear forwards ;
     visibility: hidden;
 }
-
-@keyframes fade-in{
-    from{
-         visibility: hidden;
-         opacity: 0;
-    }
-    to{
-         visibility: visible;
-         opacity: 1;
-    }
-}

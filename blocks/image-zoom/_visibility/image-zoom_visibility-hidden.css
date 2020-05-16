@@ -3,11 +3,3 @@
      /* display: none; */
 }
 
-@keyframes fade-out{
-     from{
-     }
-     to{
-          visibility: hidden;
-          opacity: 0;
-     }
-}

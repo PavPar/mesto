@@ -16,11 +16,13 @@ const profileContent = {
 //----------------
 const popup = document.querySelector('.popup'); //Получаем PopUp на странице
 
-const popup_content = {
+const popupContent = {
     btnExit: popup.querySelector(".popup__button_type_exit"),
     btnSave: popup.querySelector(".popup__button_type_save"),
     inputs: popup.querySelectorAll(".popup__input"),
-    title: popup.querySelector('.popup__title')
+    title: popup.querySelector('.popup__title'),
+    firstInput : popup.querySelector('.popup__input-first'),
+    secondInput : popup.querySelector('.popup__input-second')
 }
 
 //Показать PopUP
@@ -32,34 +34,37 @@ function showPopUp() {
 //Скрыть PopUP
 function hidePopUp() {
     popup.classList.add('popup_visibility-hidden');
+    popupContent.btnSave.removeEventListener("click",setProfileData,{once:true});
+    popupContent.btnSave.removeEventListener("click",addNewCard,{once:true});
     clearPopUpFields();
 }
 
 //Установка новых данных profile
 function setProfileData(event) {
     event.preventDefault();
-    profile.querySelector(".profile__title").textContent = popup_content.inputs[0].value;
-    profile.querySelector(".profile__subtitle").textContent = popup_content.inputs[0].value;
+    profile.querySelector(".profile__title").textContent = popupContent.firstInput.value;
+    profile.querySelector(".profile__subtitle").textContent = popupContent.secondInput.value;
     hidePopUp();
 }
 
 //Очистка всех полей popup
 function clearPopUpFields() {
-    popup_content.inputs.forEach(element => {
-        element.removeAttribute('value');
+    popupContent.inputs.forEach(element => {
+        element.value = "";
         element.removeAttribute('placeholder');
     });
 }
 
 //Заполнение popup для profile
 function fillProfilePopup() {
-    popup_content.title.textContent = "Редактировать профиль";
+    clearPopUpFields();
+    popupContent.title.textContent = "Редактировать профиль";
 
-    popup_content.inputs[0].setAttribute("value", profileContent.title.textContent);
-    popup_content.inputs[1].setAttribute("value", profileContent.subtitle.textContent);
+    popupContent.firstInput.value = profileContent.title.textContent;
+    popupContent.secondInput.value = profileContent.subtitle.textContent;
 
-    popup_content.btnExit.addEventListener('click', hidePopUp);
-    popup_content.btnSave.addEventListener('click', setProfileData);
+    popupContent.btnExit.addEventListener('click', hidePopUp);
+    popupContent.btnSave.addEventListener('click', setProfileData,{once:true});
 }
 
 //Отображение popup для profile
@@ -103,13 +108,14 @@ function appendCard(Card, reverseOrder = false) {
 
 //Заполнение popup для card
 function fillCardPopup() {
-    popup_content.title.textContent = "Создать карточку";
+    clearPopUpFields();
+    popupContent.title.textContent = "Создать карточку";
 
-    popup_content.inputs[0].setAttribute("placeholder", "Название");
-    popup_content.inputs[1].setAttribute("placeholder", "Ссылка на картинку");
+    popupContent.firstInput.setAttribute("placeholder", "Название");
+    popupContent.secondInput.setAttribute("placeholder", "Ссылка на картинку");
 
-    popup_content.btnExit.addEventListener('click', hidePopUp);
-    popup_content.btnSave.addEventListener('click', addNewCard);
+    popupContent.btnExit.addEventListener('click', hidePopUp);
+    popupContent.btnSave.addEventListener('click', addNewCard,{once:true});
 }
 
 //Отображения popup для card
@@ -121,13 +127,10 @@ function createCardPopup(){
 //Добавление новой карточки в блок карт
 function addNewCard(event){
     event.preventDefault()
-    appendCard(createCard(popup_content.inputs[0].value, popup_content.inputs[1].value),true);
+    appendCard(createCard(popupContent.firstInput.value, popupContent.secondInput.value),true);
     hidePopUp();
     clearPopUpFields();
 }
-
-profileContent.btnEdit.addEventListener("click", createProfilePopup);
-profileContent.btnAdd.addEventListener("click",createCardPopup);
 
 const imageZoom = document.querySelector(".image-zoom");
 
@@ -159,13 +162,6 @@ function zoomImage(event){
     fillImageZoom(imageParent.querySelector('.card__title').textContent,imageParent.querySelector('.card__image'));
     showImageZoom();
 }
-
-//Очистить картинку изображения(чтобы не было видно при переключении как меняется изобржание)
-// function clearImageZoom(){
-//     const image = imageZoom.querySelector('.image-zoom__image');
-//     image.removeAttribute('src');
-//     image.removeAttribute('alt');
-// }
 
 const initialCards = [
     {
@@ -200,3 +196,5 @@ initialCards.forEach((element) => {
 
 imageZoom.classList.remove("image-zoom_visibility-invisible");
 popup.classList.remove("image-zoom_visibility-invisible");
+profileContent.btnEdit.addEventListener("click", createProfilePopup);
+profileContent.btnAdd.addEventListener("click",createCardPopup);
