@@ -30,6 +30,25 @@
         <h2 class="footer__copyright">© 2020 Mesto Russia</h2>
     </footer>
 
+    <section class="popup popup_visibility-hidden">
+        <form class="popup__window">
+            <h2 class="popup__title"></h2>
+            <input class="popup__input" type="text" required>
+            <input class="popup__input" type="text" required>
+            <input class="popup__button popup__button_type_save" type="submit" value="Сохранить">
+            <input type="button" class="popup__button popup__button_type_exit">
+        </form>
+    </section>
+
+  
+    <section class="image-zoom image-zoom_visibility-hidden">
+        <div class="image-zoom__container">
+            <img class="image-zoom__image">
+            <input type="button" class="image-zoom__btn image-zoom__btn_type-exit">
+            <h2 class="image-zoom__title"></h2>
+        </div>
+    </section>
+
     <template id="card-template">
         <div class="card">
             <img draggable="false" class="card__image">
@@ -37,29 +56,6 @@
             <input type="button" class="card__button card__button_type-like">
             <input type="button" class="card__button card__button_type-delete">
         </div>
-    </template>
-
-    <template id="popup">
-        <section class="popup">
-            <form class="popup__window">
-                <h2 class="popup__title"></h2>
-                <input class="popup__input" type="text" required>
-                <input class="popup__input" type="text" required>
-                <input class="popup__button popup__button_type_save" type="submit" value="Сохранить">
-                <input type="button" class="popup__button popup__button_type_exit">
-            </form>
-        </section>
-    </template>
-
-    <template id="imageZoom">
-        <section class="image-zoom">
-            <div class="image-zoom__container">
-                <img class="image-zoom__image"
-                    src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg">
-                <input type="button" class="image-zoom__btn image-zoom__btn_type-exit">
-                <h2 class="image-zoom__title"></h2>
-            </div>
-        </section>
     </template>
 
     <script src="./js/popup/popup.js"></script>

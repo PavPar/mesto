@@ -8,8 +8,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     z-index: 3;
     background-color: rgba(0, 0, 0, .5);
     width: 100%;
     height: 100vh;
+    animation: fade-in forwards .3s linear;
+    visibility: hidden;
+}
+
+@keyframes fade-in{
+    from{
+         visibility: hidden;
+         opacity: 0;
+    }
+    to{
+         visibility: visible;
+         opacity: 1;
+    }
 }

@@ -1,0 +1,15 @@
+.popup.popup_visibility-hidden{
+     animation: fade-out .2s linear forwards ;
+     visibility: hidden;
+}
+
+@keyframes fade-out{
+     from{
+     visibility: visible;
+     }
+     to{
+          visibility: hidden;
+          opacity: 0;
+     }
+}
+

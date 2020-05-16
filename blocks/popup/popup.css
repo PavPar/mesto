@@ -9,5 +9,18 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    /* display: none; */
+    z-index: 3;
+    animation: fade-in .5s linear forwards ;
+    visibility: hidden;
+}
+
+@keyframes fade-in{
+    from{
+         visibility: hidden;
+         opacity: 0;
+    }
+    to{
+         visibility: visible;
+         opacity: 1;
+    }
 }

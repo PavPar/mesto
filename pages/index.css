@@ -12,6 +12,7 @@
 @import url(../blocks/footer/footer.css);
 /* Popup */
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/_status/popup_status-opened.css);
+@import url(../blocks/popup/_visibility/popup_visibility-hidden.css);
 /* Image zoom */
 @import url(../blocks/image-zoom/image-zoom.css);
+@import url(../blocks/image-zoom/_visibility/image-zoom_visibility-hidden.css);
