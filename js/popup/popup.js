@@ -58,18 +58,21 @@ function createProfilePopup() {
 }
 
 
-const cardTemplate = document.querySelector("#card-template"); //шалон для карты
+const cardTemplate = document.querySelector("#card-template"); //шаблон для карты
 
+//Поставить лайк карточке 
 function CardLike(event) {
     if (event.target.classList.contains('card__button_type-like')) {
         event.target.classList.toggle('card__button_state-selected');
     }
 }
 
+//Удаление карты 
 function CardDelete(event) {
     if (event.target.classList.contains('card__button_type-delete')) {
         const parent = event.target.closest('.card');
-        parent.querySelector('.card__button_type-like').removeEventListener('click', CardLike)
+        parent.querySelector('.card__button_type-like').removeEventListener('click', CardLike);
+        parent.querySelector('.card__image').removeEventListener('click',zoomImage);
         cardsArea.removeChild(parent);
     }
 }
