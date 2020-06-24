@@ -1,4 +1,3 @@
-const page = document.querySelector(".page");
 const cardsArea = document.querySelector(".cards");
 
 const profile = document.querySelector(".profile");
@@ -32,31 +31,17 @@ const popupProfileContent = {
     secondInput: popupProfile.querySelector('.popup__input-subtitle')
 }
 
-//Показать PopUP
-function showPopUp(popup) {
-    popup.classList.remove('popup_visibility-invisible');
-    popup.classList.remove('popup_visibility-hidden');
+function togglePopup(popup, className) {
+    popup.classList.toggle(className);
 }
 
-//Скрыть PopUP
-function hidePopUp(popup) {
-    popup.classList.add('popup_visibility-hidden');
-}
-
-function hideCardPopUp() {
-    hidePopUp(popupCard);
-}
-
-function hideProfilePopUp() {
-    hidePopUp(popupProfile);
-}
 
 //Установка новых данных profile
 function setProfileData(event) {
     event.preventDefault();
-    profile.querySelector(".profile__title").textContent = popupProfileContent.firstInput.value;
-    profile.querySelector(".profile__subtitle").textContent = popupProfileContent.secondInput.value;
-    hideProfilePopUp();
+    profileContent.title.textContent = popupProfileContent.firstInput.value;
+    profileContent.subtitle.textContent = popupProfileContent.secondInput.value;
+    togglePopup(popupProfile, 'popup_visibility-hidden');
 }
 
 //Заполнение popup для profile
@@ -69,14 +54,28 @@ function fillProfilePopup() {
 //Отображение popup для profile
 function createProfilePopup() {
     fillProfilePopup();
-    showPopUp(popupProfile);
+    togglePopup(popupProfile, 'popup_visibility-hidden');
 }
 
 
 const cardTemplate = document.querySelector("#card-template"); //шалон для карты
 
+function CardLike(event) {
+    if (event.target.classList.contains('card__button_type-like')) {
+        event.target.classList.toggle('card__button_state-selected');
+    }
+}
+
+function CardDelete(event) {
+    if (event.target.classList.contains('card__button_type-delete')) {
+        const parent = event.target.closest('.card');
+        parent.querySelector('.card__button_type-like').removeEventListener('click', CardLike)
+        cardsArea.removeChild(parent);
+    }
+}
+
 //Создание новой карты
-function createCard(title, imageLink, reverse = false, alt = title) {
+function createCard(title, imageLink, alt = title) {
     const newCard = cardTemplate.content.cloneNode(true).querySelector(".card");
 
     newCard.querySelector('.card__title').textContent = title;
@@ -87,22 +86,12 @@ function createCard(title, imageLink, reverse = false, alt = title) {
     image.addEventListener('click', zoomImage)
 
     newCard.querySelector('.card__button_type-like').addEventListener('click', CardLike);
-    newCard.querySelector('.card__button_type-delete').addEventListener('click', CardDelete);
+    newCard.querySelector('.card__button_type-delete').addEventListener('click', CardDelete, { once: true });
 
     return newCard;
 }
 
-function CardLike() {
-    if (event.target.classList.contains('card__button_type-like')) {
-        event.target.classList.toggle('card__button_state-selected');
-    }
-}
 
-function CardDelete() {
-    if (event.target.classList.contains('card__button_type-delete')) {
-        cardsArea.removeChild(event.target.parentNode);
-    }
-}
 //Присвоение карты документу
 function appendCard(Card, reverseOrder = false) {
     reverseOrder ? cardsArea.insertBefore(Card, cardsArea.firstChild) : cardsArea.appendChild(Card);
@@ -110,14 +99,14 @@ function appendCard(Card, reverseOrder = false) {
 
 //Отображения popup для card
 function createCardPopup() {
-    showPopUp(popupCard);
+    togglePopup(popupCard, 'popup_visibility-hidden');
 }
 
 //Добавление новой карточки в блок карт
 function addNewCard(event) {
     event.preventDefault()
     appendCard(createCard(popupCardContent.firstInput.value, popupCardContent.secondInput.value), true);
-    hideCardPopUp();
+    togglePopup(popupCard, 'popup_visibility-hidden');
 }
 
 const imageZoom = document.querySelector(".image-zoom");
@@ -128,17 +117,10 @@ function showImageZoom() {
     imageZoom.classList.remove("image-zoom_visibility-hidden");
 }
 
-//Скрыть приближение изображения
-function hideImageZoom() {
-    imageZoom.classList.add("image-zoom_visibility-hidden");
-    clearImageZoom();
-}
-
 //Заполнить приближение изображения
-function fillImageZoom(title, img) {
+function fillImageZoom(img) {
 
-    imageZoom.querySelector('.image-zoom__btn_type-exit').addEventListener('click', hideImageZoom);
-    imageZoom.querySelector('.image-zoom__title').textContent = title;
+    imageZoom.querySelector('.image-zoom__title').textContent = img.getAttribute("alt");
     const image = imageZoom.querySelector('.image-zoom__image');
     image.setAttribute('src', img.getAttribute("src"));
     image.setAttribute('alt', img.getAttribute("alt"));
@@ -146,9 +128,8 @@ function fillImageZoom(title, img) {
 
 //Приблизить изображение
 function zoomImage(event) {
-    const imageParent = event.target.parentNode;
-    fillImageZoom(imageParent.querySelector('.card__title').textContent, imageParent.querySelector('.card__image'));
-    showImageZoom();
+    fillImageZoom(event.target);
+    togglePopup(imageZoom, 'image-zoom_visibility-hidden');
 }
 
 const initialCards = [
@@ -185,8 +166,10 @@ initialCards.forEach((element) => {
 profileContent.btnEdit.addEventListener("click", createProfilePopup);
 profileContent.btnAdd.addEventListener("click", createCardPopup);
 
-popupProfileContent.btnExit.addEventListener('click', hideProfilePopUp);
+popupProfileContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupProfile, 'popup_visibility-hidden'); });
 popupProfileContent.btnSave.addEventListener('click', setProfileData);
 
-popupCardContent.btnExit.addEventListener('click', hideCardPopUp);
+popupCardContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupCard, 'popup_visibility-hidden'); });
 popupCardContent.btnSave.addEventListener('click', addNewCard);
+
+imageZoom.querySelector('.image-zoom__btn_type-exit').addEventListener('click', event => { event.preventDefault(); togglePopup(imageZoom, 'image-zoom_visibility-hidden'); });

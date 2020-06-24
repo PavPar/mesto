@@ -19,9 +19,9 @@
             <div class="profile__info">
                 <h2 class="profile__title">Жак-Ив Кусто</h2>
                 <p class="profile__subtitle">Исследователь океана</p>
-                <input type="button" class="profile__button profile__button_type_edit">
+                <button class="profile__button profile__button_type_edit"></button>
             </div>
-            <input type="button" class="profile__button profile__button_type_add">
+            <button class="profile__button profile__button_type_add"></button>
         </section>
         <section class="cards"></section>
     </main>
@@ -35,27 +35,27 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <input class="popup__input popup__input-title" type="text" required>
             <input class="popup__input popup__input-subtitle" type="text" required>
-            <input class="popup__button popup__button_type_save" type="submit" value="Сохранить">
-            <input type="button" class="popup__button popup__button_type_exit">
+            <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
+            <button class="popup__button popup__button_type_exit"></button>
         </form>
     </section>
 
     
-    <section class="popup popup-card popup_visibility-hidden popup_visibility-invisible">
+    <section class="popup popup-card popup_visibility-hidden">
         <form class="popup__window">
             <h2 class="popup__title">Создать карточку</h2>
             <input class="popup__input popup__input-card-title" type="text" required placeholder="Название">
             <input class="popup__input popup__input-card-link" type="text" required placeholder="Ссылка на изображение">
             <input class="popup__button popup__button_type_save" type="submit" value="Сохранить">
-            <input type="button" class="popup__button popup__button_type_exit">
+            <button class="popup__button popup__button_type_exit"></button>
         </form>
     </section>
 
   
-    <section class="image-zoom image-zoom_visibility-hidden image-zoom_visibility-invisible">
+    <section class="image-zoom image-zoom_visibility-hidden">
         <div class="image-zoom__container">
             <img class="image-zoom__image">
-            <input type="button" class="image-zoom__btn image-zoom__btn_type-exit">
+            <button class="image-zoom__btn image-zoom__btn_type-exit"></button>
             <h2 class="image-zoom__title"></h2>
         </div>
     </section>
@@ -64,8 +64,8 @@
         <div class="card">
             <img draggable="false" class="card__image">
             <h2 class="card__title"></h2>
-            <input type="button" class="card__button card__button_type-like">
-            <input type="button" class="card__button card__button_type-delete">
+            <button class="card__button card__button_type-like"></button>
+            <button class="card__button card__button_type-delete"></button>
         </div>
     </template>
 
