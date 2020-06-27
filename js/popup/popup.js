@@ -41,8 +41,8 @@ const popupImageZoomContent = {
     image: popupImageZoom.querySelector('.popup__image')
 }
 
-function togglePopup(popup, className) {
-    popup.classList.toggle(className);
+function togglePopup(popup) {
+    popup.classList.toggle('popup_visibility-hidden');
 }
 
 
@@ -51,7 +51,7 @@ function setProfileData(event) {
     event.preventDefault();
     profileContent.title.textContent = popupProfileContent.firstInput.value;
     profileContent.subtitle.textContent = popupProfileContent.secondInput.value;
-    togglePopup(popupProfile, 'popup_visibility-hidden');
+    togglePopup(popupProfile);
 }
 
 //Заполнение popup для profile
@@ -64,7 +64,7 @@ function fillProfilePopup() {
 //Отображение popup для profile
 function createProfilePopup() {
     fillProfilePopup();
-    togglePopup(popupProfile, 'popup_visibility-hidden');
+    togglePopup(popupProfile);
 }
 
 
@@ -111,14 +111,14 @@ function appendCard(Card, reverseOrder = false) {
 
 //Отображения popup для card
 function createCardPopup() {
-    togglePopup(popupCard, 'popup_visibility-hidden');
+    togglePopup(popupCard);
 }
 
 //Добавление новой карточки в блок карт
 function addNewCard(event) {
     event.preventDefault()
     appendCard(createCard(popupCardContent.firstInput.value, popupCardContent.secondInput.value), true);
-    togglePopup(popupCard, 'popup_visibility-hidden');
+    togglePopup(popupCard);
 }
 
 
@@ -138,7 +138,7 @@ function fillImageZoom(img) {
 //Приблизить изображение
 function zoomImage(event) {
     fillImageZoom(event.target);
-    togglePopup(popupImageZoom, 'popup_visibility-hidden');
+    togglePopup(popupImageZoom);
 }
 
 const initialCards = [
@@ -175,10 +175,10 @@ initialCards.forEach((element) => {
 profileContent.btnEdit.addEventListener("click", createProfilePopup);
 profileContent.btnAdd.addEventListener("click", createCardPopup);
 
-popupProfileContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupProfile, 'popup_visibility-hidden'); });
+popupProfileContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupProfile); });
 popupProfileContent.btnSave.addEventListener('click', setProfileData);
 
-popupCardContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupCard, 'popup_visibility-hidden'); });
+popupCardContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupCard); });
 popupCardContent.btnSave.addEventListener('click', addNewCard);
 
-popupImageZoomContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupImageZoom, 'popup_visibility-hidden'); });
+popupImageZoomContent.btnExit.addEventListener('click', event => { event.preventDefault(); togglePopup(popupImageZoom); });
