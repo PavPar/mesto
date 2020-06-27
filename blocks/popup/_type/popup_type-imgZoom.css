@@ -1,0 +1,8 @@
+.popup_type-imgZoom{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fade-in forwards .3s linear;
+}

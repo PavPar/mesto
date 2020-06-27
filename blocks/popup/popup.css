@@ -4,6 +4,11 @@
 @import url(./__button/popup__button.css);
 @import url(./__button/_type/popup__button_type_exit.css);
 @import url(./__button/_type/popup__button_type_save.css);
+/* -- */
+@import url(./__container/popup__container.css);
+@import url(./__image/popup__image.css);
+@import url(./__subtitle/popup__subtitle.css);
+
 .popup {
     position: fixed;
     width: 100%;
