@@ -174,26 +174,26 @@ initialCards.forEach((element) => {
 
 function closePopupCard(e) {
     e.preventDefault();
-    closePopup(e, popupCard);
+    togglePopup(popupCard);
 }
 
 function closePopupProfile(e) {
     e.preventDefault();
-    closePopup(e, popupProfile);
+    togglePopup(popupProfile);
 }
 
 function closePopupImgZoom(e) {
     e.preventDefault();
-    closePopup(e, popupImageZoom);
+    togglePopup(popupImageZoom);
 }
 
 profileContent.btnEdit.addEventListener("click", createProfilePopup);
 profileContent.btnAdd.addEventListener("click", createCardPopup);
 
-popupProfileContent.btnExit.addEventListener(closePopupProfile);
+popupProfileContent.btnExit.addEventListener("click", closePopupProfile);
 popupProfile.addEventListener('submit', setProfileData);
 
-popupCardContent.btnExit.addEventListener(closePopupCard);
+popupCardContent.btnExit.addEventListener("click", closePopupCard);
 popupCard.addEventListener('submit', addNewCard);
 
-popupImageZoomContent.btnExit.addEventListener('click',closePopupImgZoom);
+popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
