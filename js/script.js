@@ -69,10 +69,10 @@ function createProfilePopup() {
 
 //Заполнить приближение изображения
 function fillImageZoom(img) {
-    let alt = img.getAttribute("alt");
+    const alt = img.getAttribute("alt");
     popupImageZoomContent.subtitle.textContent = alt;
     popupImageZoomContent.image.alt = alt;
-    popupImageZoomContent.image.src = img.getAttribute("src");
+    popupImageZoomContent.image.src = img.src;
 }
 
 //Приблизить изображение
@@ -88,10 +88,10 @@ function cardLike(event) {
 
 //Удаление карты 
 function cardDelete(event) {
-    const parent = event.target.closest('.card');
-    parent.querySelector('.card__button_type-like').removeEventListener('click', cardLike);
-    parent.querySelector('.card__image').removeEventListener('click', zoomImage);
-    cardsArea.removeChild(parent);
+    const card = event.target.closest('.card');
+    card.querySelector('.card__button_type-like').removeEventListener('click', cardLike);
+    card.querySelector('.card__image').removeEventListener('click', zoomImage);
+    cardsArea.removeChild(card);
 }
 
 //Создание новой карты
