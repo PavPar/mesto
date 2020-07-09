@@ -20,7 +20,8 @@ const popupCardContent = {
     inputs: popupCard.querySelectorAll(".popup__input"),
     title: popupCard.querySelector('.popup__title'),
     firstInput: popupCard.querySelector('.popup__input-card-title'),
-    secondInput: popupCard.querySelector('.popup__input-card-link')
+    secondInput: popupCard.querySelector('.popup__input-card-link'),
+    form: popupCard.querySelector('.popup__window')
 }
 
 const popupProfile = document.querySelector('.popup-profile'); //Получаем PopUp на странице
@@ -150,6 +151,7 @@ function addNewCard(event) {
     appendCardFirst(createCard(popupCardContent.firstInput.value, popupCardContent.secondInput.value));
     togglePopup(popupCard);
     clearInput([popupCardContent.firstInput, popupCardContent.secondInput]);
+    popupCard.form.reset();//Очистка формы
 }
 
 const initialCards = [
@@ -199,8 +201,8 @@ function closePopupImgZoom(e) {
     togglePopup(popupImageZoom);
 }
 
+//Закрыть popup клавишей
 function keyClosePopup(evt) {
-    evt.preventDefault();
     if (evt.key === "Escape") {
         popupArray.forEach((popupElement) => {
             if (isPopupActive(popupElement)) {
@@ -208,6 +210,13 @@ function keyClosePopup(evt) {
                 return; //Не будем проходить все popup, потому что может быть открыт только один
             }
         });
+    }
+}
+
+//Закрыть popup кликом по фону
+function backgrndClosePopup(evt) {
+    if (evt.target.classList.contains("popup")) {
+        togglePopup(evt.target);
     }
 }
 
@@ -221,7 +230,10 @@ popupCardContent.btnExit.addEventListener("click", closePopupCard);
 popupCard.addEventListener('submit', addNewCard);
 
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
-cardsArea.addEventListener('click', cardLike); // Перепишем чтобы не было делегации и было меньше eventlistener-ов
+cardsArea.addEventListener('click', cardLike);
 
-document.addEventListener('keydown', keyClosePopup)// Вместо того чтобы иметь 3 event listener у нас будет один на обработку клавишы выхода
+document.addEventListener('keydown', keyClosePopup)
 
+popupArray.forEach((popupElement) => {
+    popupElement.addEventListener('click', backgrndClosePopup);
+})
