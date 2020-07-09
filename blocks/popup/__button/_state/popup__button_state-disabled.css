@@ -1,0 +1,12 @@
+.popup__button_state-disabled {
+    opacity: 0.2;
+    background: #E5E5E5;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    border: 1px black solid;
+    box-sizing: border-box;
+    transition: none;
+    pointer-events: none;
+}
