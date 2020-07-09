@@ -197,3 +197,4 @@ popupCardContent.btnExit.addEventListener("click", closePopupCard);
 popupCard.addEventListener('submit', addNewCard);
 
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
+

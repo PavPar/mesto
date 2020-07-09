@@ -33,8 +33,8 @@
     <section class="popup popup-profile popup_visibility-hidden">
         <form class="popup__window">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__input popup__input-title" type="text" required>
-            <input class="popup__input popup__input-subtitle" type="text" required>
+            <input class="popup__input popup__input-title" type="text" required minlength="2" maxlength="40">
+            <input class="popup__input popup__input-subtitle" type="text" required minlength="2" maxlength="200">
             <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
             <button class="popup__button popup__button_type_exit"></button>
         </form>
@@ -44,8 +44,8 @@
     <section class="popup popup-card popup_visibility-hidden">
         <form class="popup__window">
             <h2 class="popup__title">Создать карточку</h2>
-            <input class="popup__input popup__input-card-title" type="text" required placeholder="Название">
-            <input class="popup__input popup__input-card-link" type="text" required placeholder="Ссылка на изображение">
+            <input class="popup__input popup__input-card-title" type="text" required placeholder="Название" minlength="1" maxlength="30">
+            <input class="popup__input popup__input-card-link" type="url" required placeholder="Ссылка на изображение">
             <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
             <button class="popup__button popup__button_type_exit"></button>
         </form>
