@@ -1,8 +1,9 @@
+const popupArray = Array.from(document.querySelectorAll('.popup'));//массив со всеми popup
+
 const cardsArea = document.querySelector(".cards");
+const cardTemplate = document.querySelector("#card-template"); //шаблон для карты
 
 const profile = document.querySelector(".profile");
-
-const cardTemplate = document.querySelector("#card-template"); //шаблон для карты
 
 const profileContent = {
     btnEdit: profile.querySelector(".profile__button_type_edit"),
@@ -45,6 +46,10 @@ function togglePopup(popup) {
     popup.classList.toggle('popup_visibility-hidden');
 }
 
+//Проверка что popup запущен
+function isPopupActive(popup) {
+    return !popup.classList.contains('popup_visibility-hidden')
+}
 
 //Установка новых данных profile
 function setProfileData(event) {
@@ -86,8 +91,8 @@ function zoomImage(event) {
 //     event.target.classList.toggle('card__button_state-selected');
 // }
 //Поставить лайк карточке вер_2
-function cardLike(){
-    if(event.target.classList.contains('card__button_type-like')){
+function cardLike() {
+    if (event.target.classList.contains('card__button_type-like')) {
         event.target.classList.toggle('card__button_state-selected');
     }
 }
@@ -194,6 +199,28 @@ function closePopupImgZoom(e) {
     togglePopup(popupImageZoom);
 }
 
+function keyCloseAllPopups(evt) {
+    evt.preventDefault();
+    if (evt.key === "Escape") {
+        popupArray.forEach((popupElement) => {
+            if (isPopupActive(popupElement)) {
+                togglePopup(popupElement);
+            }
+        });
+    }
+}
+
+// function assignKeyClosePopup(popup){
+//     popup.addEventListener('keydown',(evt)=>{
+//         if(evt.target.classList.contains('popup')){
+//             console.log(evt);
+//             e.preventDefault()
+//             togglePopup(popup);
+//         }
+//     })
+// }
+
+
 profileContent.btnEdit.addEventListener("click", createProfilePopup);
 profileContent.btnAdd.addEventListener("click", createCardPopup);
 
@@ -204,4 +231,6 @@ popupCardContent.btnExit.addEventListener("click", closePopupCard);
 popupCard.addEventListener('submit', addNewCard);
 
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
-cardsArea.addEventListener('click',cardLike); // Перепишем чтобы не было делегации и было меньше eventlistener-ов
+cardsArea.addEventListener('click', cardLike); // Перепишем чтобы не было делегации и было меньше eventlistener-ов
+document.addEventListener('keydown', keyCloseAllPopups)// Вместо того чтобы иметь 4 event listener у нас будет один на обработку клавишы выхода
+
