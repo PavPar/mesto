@@ -199,27 +199,17 @@ function closePopupImgZoom(e) {
     togglePopup(popupImageZoom);
 }
 
-function keyCloseAllPopups(evt) {
+function keyClosePopup(evt) {
     evt.preventDefault();
     if (evt.key === "Escape") {
         popupArray.forEach((popupElement) => {
             if (isPopupActive(popupElement)) {
                 togglePopup(popupElement);
+                return; //Не будем проходить все popup, потому что может быть открыт только один
             }
         });
     }
 }
-
-// function assignKeyClosePopup(popup){
-//     popup.addEventListener('keydown',(evt)=>{
-//         if(evt.target.classList.contains('popup')){
-//             console.log(evt);
-//             e.preventDefault()
-//             togglePopup(popup);
-//         }
-//     })
-// }
-
 
 profileContent.btnEdit.addEventListener("click", createProfilePopup);
 profileContent.btnAdd.addEventListener("click", createCardPopup);
@@ -232,5 +222,6 @@ popupCard.addEventListener('submit', addNewCard);
 
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
 cardsArea.addEventListener('click', cardLike); // Перепишем чтобы не было делегации и было меньше eventlistener-ов
-document.addEventListener('keydown', keyCloseAllPopups)// Вместо того чтобы иметь 4 event listener у нас будет один на обработку клавишы выхода
+
+document.addEventListener('keydown', keyClosePopup)// Вместо того чтобы иметь 3 event listener у нас будет один на обработку клавишы выхода
 
