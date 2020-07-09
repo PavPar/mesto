@@ -81,15 +81,21 @@ function zoomImage(event) {
     togglePopup(popupImageZoom);
 }
 
-//Поставить лайк карточке 
-function cardLike(event) {
-    event.target.classList.toggle('card__button_state-selected');
+// //Поставить лайк карточке 
+// function cardLike(event) {
+//     event.target.classList.toggle('card__button_state-selected');
+// }
+//Поставить лайк карточке вер_2
+function cardLike(){
+    if(event.target.classList.contains('card__button_type-like')){
+        event.target.classList.toggle('card__button_state-selected');
+    }
 }
 
 //Удаление карты 
 function cardDelete(event) {
     const card = event.target.closest('.card');
-    card.querySelector('.card__button_type-like').removeEventListener('click', cardLike);
+    // card.querySelector('.card__button_type-like').removeEventListener('click', cardLike);
     card.querySelector('.card__image').removeEventListener('click', zoomImage);
     cardsArea.removeChild(card);
 }
@@ -105,7 +111,7 @@ function createCard(title, imageLink, alt = title) {
     image.alt = alt;
     image.addEventListener('click', zoomImage)
 
-    newCard.querySelector('.card__button_type-like').addEventListener('click', cardLike);
+    // newCard.querySelector('.card__button_type-like').addEventListener('click', cardLike);
     newCard.querySelector('.card__button_type-delete').addEventListener('click', cardDelete, { once: true });
 
     return newCard;
@@ -172,6 +178,7 @@ initialCards.forEach((element) => {
     appendCardLast(createCard(element.title, element.src));
 });
 
+
 function closePopupCard(e) {
     e.preventDefault();
     togglePopup(popupCard);
@@ -197,4 +204,4 @@ popupCardContent.btnExit.addEventListener("click", closePopupCard);
 popupCard.addEventListener('submit', addNewCard);
 
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
-
+cardsArea.addEventListener('click',cardLike); // Перепишем чтобы не было делегации и было меньше eventlistener-ов
