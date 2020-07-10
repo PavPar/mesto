@@ -237,5 +237,3 @@ document.addEventListener('keydown', keyClosePopup)
 popupArray.forEach((popupElement) => {
     popupElement.addEventListener('click', backgrndClosePopup);
 });
-
-togglePopup(popupProfile);
