@@ -192,17 +192,28 @@ function isInputInvalid(input) {
     return !input.validity.valid;
 }
 
-function showInputErrMsg(msgContainer, msg) {
-    msgContainer.textContent = msg;
+function showInputError(inputObj) {
+    if (!inputObj.input.validity.valid) {
+        inputObj.errMsg.textContent = inputObj.input.validationMessage
+        inputObj.input.classList.add();
+    }
+    return false;
 }
 
-function hideInputErrMsg() {
-    msgContainer.textContent = "";
+function hideInputError(inputObj) {
+    if (inputObj.input.validity.valid) {
+        inputObj.errMsg.textContent = ""
+        inputObj.input.classList.remove();
+    }
 }
 
 function validateForm(content) {
-    const isInvalid = content.inputs.some((obj) => {
-        return !obj.input.validity.valid
+    const isInvalid = content.inputs.forEach((obj) => {
+        if (!obj.input.validity.valid) {
+            showInputError(obj);
+        } else {
+            hideInputError(obj);
+         }
     });//Проходим все инпуты на ошибку
 
     if (isInvalid) {
@@ -212,17 +223,17 @@ function validateForm(content) {
     }
 }
 
+
 popupCardContent.form.addEventListener('input', (evt) => {
-    validateForm(popupCardContent)
+    validateForm(popupCardContent);
 })
 
-popupProfileContent.form.addEventListener('input', () => {
-
+popupProfileContent.form.addEventListener('input', (evt) => {
+    validateForm(popupProfileContent);
 })
-// popupCardContent.form.addEventListener()
-// switchBtndisdisabled(popupCardContent);
-// switchBtndisdisabled(popupProfileContent);
 
+validateForm(popupCardContent);
+validateForm(popupProfileContent);
 
 function closePopupCard(e) {
     e.preventDefault();
