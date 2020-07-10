@@ -208,12 +208,14 @@ function hideInputError(inputObj) {
 }
 
 function validateForm(content) {
-    const isInvalid = content.inputs.forEach((obj) => {
+    let isInvalid = false;
+    content.inputs.forEach((obj) => {
         if (!obj.input.validity.valid) {
             showInputError(obj);
+            isInvalid = true;
         } else {
             hideInputError(obj);
-         }
+        }
     });//Проходим все инпуты на ошибку
 
     if (isInvalid) {
