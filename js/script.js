@@ -89,21 +89,16 @@ function zoomImage(event) {
     togglePopup(popupImageZoom);
 }
 
-// //Поставить лайк карточке 
-// function cardLike(event) {
-//     event.target.classList.toggle('card__button_disdisabled-selected');
-// }
 //Поставить лайк карточке вер_2
 function cardLike() {
     if (event.target.classList.contains('card__button_type-like')) {
-        event.target.classList.toggle('card__button_disdisabled-selected');
+        event.target.classList.toggle('card__button_state-selected');
     }
 }
 
 //Удаление карты 
 function cardDelete(event) {
     const card = event.target.closest('.card');
-    // card.querySelector('.card__button_type-like').removeEventListener('click', cardLike);
     card.querySelector('.card__image').removeEventListener('click', zoomImage);
     cardsArea.removeChild(card);
 }
