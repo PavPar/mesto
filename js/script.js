@@ -203,21 +203,15 @@ function showInputError(inputObj) {
 
 function hideInputError(inputObj) {
     if (inputObj.input.validity.valid) {
-        inputObj.errMsg.textContent = ""
+        inputObj.errMsg.textContent = "";
         inputObj.input.classList.remove(inputErrClass);
     }
 }
 
 function validateForm(content) {
-    let isInvalid = false;
-    content.inputs.some((obj) => {
-        if (!obj.input.validity.valid) {
-            showInputError(obj);
-            isInvalid = true;
-        } else {
-            hideInputError(obj);
-        }
-    });//Проходим все инпуты на ошибку
+    const isInvalid = content.inputs.some((obj) => {
+            return !obj.input.validity.valid;
+        });//Проходим все инпуты на ошибку
 
     if (isInvalid) {
         switchBtndisdisabled(content.btnSave, true);
@@ -226,6 +220,24 @@ function validateForm(content) {
     }
 }
 
+function setInputValidation(content) {
+    content.inputs.forEach((obj) => {
+        obj.input.addEventListener('input',() => {
+            if (!obj.input.validity.valid) {
+                showInputError(obj);
+                isInvalid = true;
+            } else {
+                hideInputError(obj);
+            }
+        })
+    });//Проходим все инпуты на ошибку
+}
+//Назначение слушателей на все input
+setInputValidation(popupCardContent);
+setInputValidation(popupProfileContent);
+//Первичные валидации форм
+validateForm(popupCardContent); 
+validateForm(popupProfileContent);
 
 popupCardContent.form.addEventListener('input', (evt) => {
     validateForm(popupCardContent);
