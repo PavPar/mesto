@@ -158,6 +158,7 @@ function addNewCard(event) {
 
 //Валидация форм
 const btnDisableClass = 'popup__button_state-disabled';
+const inputErrClass = 'popup__input_validity-invalid';
 
 function switchBtndisdisabled(btn, disabled) {
     disabled ?
@@ -194,8 +195,8 @@ function isInputInvalid(input) {
 
 function showInputError(inputObj) {
     if (!inputObj.input.validity.valid) {
-        inputObj.errMsg.textContent = inputObj.input.validationMessage
-        inputObj.input.classList.add();
+        inputObj.errMsg.textContent = inputObj.input.validationMessage;
+        inputObj.input.classList.add(inputErrClass);
     }
     return false;
 }
@@ -203,13 +204,13 @@ function showInputError(inputObj) {
 function hideInputError(inputObj) {
     if (inputObj.input.validity.valid) {
         inputObj.errMsg.textContent = ""
-        inputObj.input.classList.remove();
+        inputObj.input.classList.remove(inputErrClass);
     }
 }
 
 function validateForm(content) {
     let isInvalid = false;
-    content.inputs.forEach((obj) => {
+    content.inputs.some((obj) => {
         if (!obj.input.validity.valid) {
             showInputError(obj);
             isInvalid = true;
@@ -233,9 +234,6 @@ popupCardContent.form.addEventListener('input', (evt) => {
 popupProfileContent.form.addEventListener('input', (evt) => {
     validateForm(popupProfileContent);
 })
-
-validateForm(popupCardContent);
-validateForm(popupProfileContent);
 
 function closePopupCard(e) {
     e.preventDefault();
