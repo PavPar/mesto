@@ -160,7 +160,8 @@ function addNewCard(event) {
 const btnDisableClass = 'popup__button_state-disabled';
 const inputErrClass = 'popup__input_validity-invalid';
 
-function switchBtndisdisabled(btn, disabled) {
+//Переключение состояния кнопки
+function switchBtn(btn, disabled) {
     disabled ?
         btn.classList.add(btnDisableClass) :
         btn.classList.remove(btnDisableClass);
@@ -173,6 +174,8 @@ function getErrMsgField(form, input) {
     return form.querySelector(`#${input.id}-errmsg`)
 }
 
+//Получить все input и поля для вывода ошибки 
+//Возвращает массив обЪектов [{input,errmsg}]
 function getFormInputs(form) {
     const inputArray = Array.from(form.querySelectorAll('.popup__input'));
     const inputs = [];
@@ -186,13 +189,11 @@ function getFormInputs(form) {
 
 }
 
+//Получение всех input 
 popupCardContent.inputs = getFormInputs(popupCardContent.form);
 popupProfileContent.inputs = getFormInputs(popupProfileContent.form);
 
-function isInputInvalid(input) {
-    return !input.validity.valid;
-}
-
+//Вывести сообщение об ошибке и изменить стиль инпута
 function showInputError(inputObj) {
     if (!inputObj.input.validity.valid) {
         inputObj.errMsg.textContent = inputObj.input.validationMessage;
@@ -201,6 +202,7 @@ function showInputError(inputObj) {
     return false;
 }
 
+//Спрятать сообщение об ошибке и изменить стиль инпута
 function hideInputError(inputObj) {
     if (inputObj.input.validity.valid) {
         inputObj.errMsg.textContent = "";
@@ -208,21 +210,23 @@ function hideInputError(inputObj) {
     }
 }
 
+//Выполнить проверку формы и влкючить/отключить кнопку
 function validateForm(content) {
     const isInvalid = content.inputs.some((obj) => {
-            return !obj.input.validity.valid;
-        });//Проходим все инпуты на ошибку
+        return !obj.input.validity.valid;
+    });
 
     if (isInvalid) {
-        switchBtndisdisabled(content.btnSave, true);
+        switchBtn(content.btnSave, true);
     } else {
-        switchBtndisdisabled(content.btnSave, false);
+        switchBtn(content.btnSave, false);
     }
 }
 
+//Добавить проверку полей
 function setInputValidation(content) {
     content.inputs.forEach((obj) => {
-        obj.input.addEventListener('input',() => {
+        obj.input.addEventListener('input', () => {
             if (!obj.input.validity.valid) {
                 showInputError(obj);
                 isInvalid = true;
@@ -230,13 +234,15 @@ function setInputValidation(content) {
                 hideInputError(obj);
             }
         })
-    });//Проходим все инпуты на ошибку
+    });
 }
+
 //Назначение слушателей на все input
 setInputValidation(popupCardContent);
 setInputValidation(popupProfileContent);
+
 //Первичные валидации форм
-validateForm(popupCardContent); 
+validateForm(popupCardContent);
 validateForm(popupProfileContent);
 
 popupCardContent.form.addEventListener('input', (evt) => {
