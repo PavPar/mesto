@@ -17,7 +17,6 @@ const popupCard = document.querySelector('.popup-card'); //Получаем PopU
 const popupCardContent = {
     btnExit: popupCard.querySelector(".popup__button_type_exit"),
     btnSave: popupCard.querySelector(".popup__button_type_save"),
-    inputs: [],
     title: popupCard.querySelector('.popup__title'),
     firstInput: popupCard.querySelector('.popup__input-card-title'),
     secondInput: popupCard.querySelector('.popup__input-card-link'),
@@ -29,7 +28,6 @@ const popupProfile = document.querySelector('.popup-profile'); //Получае�
 const popupProfileContent = {
     btnExit: popupProfile.querySelector(".popup__button_type_exit"),
     btnSave: popupProfile.querySelector(".popup__button_type_save"),
-    inputs: [],
     title: popupProfile.querySelector('.popup__title'),
     firstInput: popupProfile.querySelector('.popup__input-title'),
     secondInput: popupProfile.querySelector('.popup__input-subtitle'),
@@ -44,7 +42,7 @@ const popupImageZoomContent = {
     image: popupImageZoom.querySelector('.popup__image')
 }
 
-
+//Переключить состояние popup
 function togglePopup(popup) {
     popup.classList.toggle('popup_visibility-hidden');
     document.addEventListener('keydown', keyClosePopup, { once: true });
@@ -136,19 +134,11 @@ function createCardPopup() {
     togglePopup(popupCard);
 }
 
-//Очистка ввода данных
-function clearInput(inputs) {
-    inputs.forEach((input) => {
-        input.value = "";
-    })
-}
-
 //Добавление новой карточки в блок карт
 function addNewCard(event) {
     event.preventDefault()
     appendCardFirst(createCard(popupCardContent.firstInput.value, popupCardContent.secondInput.value));
     togglePopup(popupCard);
-    clearInput([popupCardContent.firstInput, popupCardContent.secondInput]);
     popupCardContent.form.reset();//Очистка формы
 }
 
