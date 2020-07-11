@@ -18,6 +18,7 @@
     .popup__errmsg {
         font-size: 10px;
         line-height: 13px;
+        min-height: 3em;
     }
     .popup__errmsg:nth-of-type(1) {
         margin-bottom: 10px;
