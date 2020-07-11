@@ -47,6 +47,7 @@ const popupImageZoomContent = {
 
 function togglePopup(popup) {
     popup.classList.toggle('popup_visibility-hidden');
+    document.addEventListener('keydown', keyClosePopup, { once: true });
 }
 
 //Проверка что popup запущен
@@ -197,7 +198,6 @@ popupCard.addEventListener('submit', addNewCard);
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
 cardsArea.addEventListener('click', cardLike);
 
-document.addEventListener('keydown', keyClosePopup)
 
 popupArray.forEach((popupElement) => {
     popupElement.addEventListener('click', backgrndClosePopup);
