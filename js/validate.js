@@ -1,10 +1,20 @@
-const btnDisableClass = 'popup__button_state-disabled';
-const inputErrClass = 'popup__input_validity-invalid';
+// enableValidation({
+//     formSelector: '.popup__form',
+//     inputSelector: '.popup__input',
+//     submitButtonSelector: '.popup__button',
+//     inactiveButtonClass: 'popup__button_state-disabled',
+//     inputErrorClass: 'popup__input_type_error',
+//     errorClass: 'popup__error_visible'
+// });
 
 //Получаем все формы popup по именам
 const forms = Array.from(document.forms).filter((formElement) => {
     return formElement.name.includes('popup__');
 });
+
+
+const btnDisableClass = 'popup__button_state-disabled';
+const inputErrClass = 'popup__input_validity-invalid';
 
 //Получить все input и поля для вывода ошибки 
 //Возвращает массив обЪектов [{input,errmsg}]
@@ -101,3 +111,7 @@ formsContent.forEach((formContentElement) => {
     setInputValidation(formContentElement);
     validateForm(formContentElement);//Первичная валидация
 })
+
+
+
+

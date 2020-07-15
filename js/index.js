@@ -20,7 +20,7 @@ const popupCardContent = {
     title: popupCard.querySelector('.popup__title'),
     firstInput: popupCard.querySelector('.popup__input-card-title'),
     secondInput: popupCard.querySelector('.popup__input-card-link'),
-    form: popupCard.querySelector('.popup__window')
+    form: popupCard.querySelector('.popup__window'),
 }
 
 const popupProfile = document.querySelector('.popup-profile'); //Получаем PopUp на странице
@@ -31,7 +31,7 @@ const popupProfileContent = {
     title: popupProfile.querySelector('.popup__title'),
     firstInput: popupProfile.querySelector('.popup__input-title'),
     secondInput: popupProfile.querySelector('.popup__input-subtitle'),
-    form: popupProfile.querySelector('.popup__window')
+    form: popupProfile.querySelector('.popup__window'),
 }
 
 const popupImageZoom = document.querySelector(".popup_type-imgZoom");
@@ -42,16 +42,53 @@ const popupImageZoomContent = {
     image: popupImageZoom.querySelector('.popup__image')
 }
 
-//Переключить состояние popup
-function togglePopup(popup) {
-    popup.classList.toggle('popup_visibility-hidden');
-    document.addEventListener('keydown', keyClosePopup);
+const popupValidationFields = {
+    input: ".popup__input",
+    errMsg: ".popup__errmsg",
+    submitBtn: ".popup__button_type_save",
+    input_errClass: "popup__input_validity-invalid",
+    submitBtn_disClass: "popup__button_state-disabled"
+}
+
+//Снимает все что было поставленно на popup в процессе валидации формы
+function revertPopup(popup) {
+    const inputs = Array.from(popup.querySelectorAll(popupValidationFields.input));
+    const errMsg = Array.from(popup.querySelectorAll(popupValidationFields.errMsg));
+    const submitBtn = popup.querySelector(popupValidationFields.submitBtn);
+
+    inputs.forEach((inputElement) => {
+        inputElement.classList.remove(popupValidationFields.input_errClass);
+    });
+
+    errMsg.forEach((errMsgElement) => {
+        errMsgElement.textContent = "";
+    });
+
+    const isInvalid = inputs.some((inputElement) => {
+        return !inputElement.validity.valid;
+    });
+
+    if(!isInvalid){ //Убираем ограничение с кнопки если у нас в форме все правильно
+        submitBtn.classList.remove(popupValidationFields.submitBtn_disClass);
+        submitBtn.disabled = false;
+    }
 }
 
 //Проверка что popup запущен
 function isPopupActive(popup) {
     return !popup.classList.contains('popup_visibility-hidden')
 }
+
+//Переключить состояние popup
+function togglePopup(popup) {
+    if(!isPopupActive(popup)){
+        revertPopup(popup); //Производим чистку только в случае если popup не виден (Иначе при его закрытии будет видна очистка полей)
+    }
+    popup.classList.toggle('popup_visibility-hidden');
+    document.addEventListener('keydown', keyClosePopup);
+}
+
+
 
 //Установка новых данных profile
 function setProfileData(event) {
@@ -163,8 +200,8 @@ function keyClosePopup(evt) {
         popupArray.forEach((popupElement) => {
             if (isPopupActive(popupElement)) {
                 togglePopup(popupElement);
-                document.removeEventListener('keydown', keyClosePopup); 
-                return; //Не будем проходить все popup, потому что может быть открыт только один
+                document.removeEventListener('keydown', keyClosePopup);
+                return;
             }
         });
     }
