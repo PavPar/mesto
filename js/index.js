@@ -43,6 +43,7 @@ const popupImageZoomContent = {
 }
 
 const popupValidationFields = {
+    form: ".popup__window",
     input: ".popup__input",
     errMsg: ".popup__errmsg",
     submitBtn: ".popup__button_type_save",
@@ -51,10 +52,10 @@ const popupValidationFields = {
 }
 
 //Снимает все что было поставленно на popup в процессе валидации формы
-function revertPopup(popup) {
-    const inputs = Array.from(popup.querySelectorAll(popupValidationFields.input));
-    const errMsg = Array.from(popup.querySelectorAll(popupValidationFields.errMsg));
-    const submitBtn = popup.querySelector(popupValidationFields.submitBtn);
+function revertForm(form) {
+    const inputs = Array.from(form.querySelectorAll(popupValidationFields.input));
+    const errMsg = Array.from(form.querySelectorAll(popupValidationFields.errMsg));
+    const submitBtn = form.querySelector(popupValidationFields.submitBtn);
 
     inputs.forEach((inputElement) => {
         inputElement.classList.remove(popupValidationFields.input_errClass);
@@ -81,8 +82,9 @@ function isPopupActive(popup) {
 
 //Переключить состояние popup
 function togglePopup(popup) {
-    if(!isPopupActive(popup)){
-        revertPopup(popup); //Производим чистку только в случае если popup не виден (Иначе при его закрытии будет видна очистка полей)
+    const hasForm = popup.querySelector(popupValidationFields.form);
+    if(!isPopupActive(popup) && hasForm){
+        revertForm(hasForm); //Производим чистку только в случае если popup не виден (Иначе при его закрытии будет видна очистка полей)
     }
     popup.classList.toggle('popup_visibility-hidden');
     document.addEventListener('keydown', keyClosePopup);
