@@ -28,7 +28,7 @@ function getErrMsgField(form, input) {
 
 //Bзменить стиль инпута
 function showInputError(inputElement, inputErrClass) {
-    if (inputElement.validity.valid) {
+    if (!inputElement.validity.valid) {
         inputElement.classList.add(inputErrClass);
     }
 }
@@ -68,8 +68,8 @@ function validateForm(inputsArray, btnSubmit, btnDisableClass) {
 function setInputValidation(inputElement, inputErrClass, errMsgElement) {
     inputElement.addEventListener('input', () => {
         if (!inputElement.validity.valid) {
-            showInputError(inputElement, "arse");
-            showErrMsg(errMsgElement, inputElement)
+            showInputError(inputElement, inputErrClass);
+            showErrMsg(errMsgElement, inputElement.validationMessage)
         } else {
             hideInputError(inputElement, inputErrClass);
             hideErrMsg(errMsgElement)
@@ -87,7 +87,7 @@ function enableValidation(popupElement, { formSelector, inputSelector, submitBut
     })
 
     formContent.inputs.forEach((inputElement) => {
-        setInputValidation(inputElement, inputErrorClass, getErrMsgField(form,inputElement));
+        setInputValidation(inputElement, inputErrorClass, getErrMsgField(form, inputElement));
     })
 
     validateForm(formContent.inputs, formContent.btnsubmit, inactiveButtonClass);//Первичная валидация
