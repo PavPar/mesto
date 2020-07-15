@@ -45,7 +45,7 @@ const popupImageZoomContent = {
 //Переключить состояние popup
 function togglePopup(popup) {
     popup.classList.toggle('popup_visibility-hidden');
-    document.addEventListener('keydown', keyClosePopup, { once: true });
+    document.addEventListener('keydown', keyClosePopup);
 }
 
 //Проверка что popup запущен
@@ -163,6 +163,7 @@ function keyClosePopup(evt) {
         popupArray.forEach((popupElement) => {
             if (isPopupActive(popupElement)) {
                 togglePopup(popupElement);
+                document.removeEventListener('keydown', keyClosePopup); 
                 return; //Не будем проходить все popup, потому что может быть открыт только один
             }
         });
