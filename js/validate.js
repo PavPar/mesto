@@ -1,51 +1,20 @@
-// enableValidation({
-//     formSelector: '.popup__form',
-//     inputSelector: '.popup__input',
-//     submitButtonSelector: '.popup__button',
-//     inactiveButtonClass: 'popup__button_state-disabled',
-//     inputErrorClass: 'popup__input_type_error',
-//     errorClass: 'popup__error_visible'
-// });
-
-//Получаем все формы popup по именам
-const forms = Array.from(document.forms).filter((formElement) => {
-    return formElement.name.includes('popup__');
-});
-
-
-const btnDisableClass = 'popup__button_state-disabled';
-const inputErrClass = 'popup__input_validity-invalid';
-
-//Получить все input и поля для вывода ошибки 
-//Возвращает массив обЪектов [{input,errmsg}]
-function getFormInputs(form) {
-    const inputArray = Array.from(form.querySelectorAll('.popup__input'));
-    const inputs = [];
-    inputArray.forEach((inputElement) => {
-        inputs.push({
-            input: inputElement,
-            errMsg: getErrMsgField(form, inputElement)
-        });
-    })
-    return inputs;
+//Получить все input
+function getInputsArr(form, inputClass) {
+    return Array.from(form.querySelectorAll(inputClass));
 }
 
-//Получить массив форм со всеми необходимыми элементами
-function getFormsContent() {
-    const formsContent = [];
-    forms.forEach((formElement) => {
-        formsContent.push({
-            form: formElement,
-            inputs: getFormInputs(formElement),
-            btnSave: formElement.querySelector(".popup__button_type_save")
-        })
-    });
-    return formsContent;
+//Получить объект формы со всеми необходимыми элементами
+function getFormContent(form, inputClass, btnSubmitClass) {
+    return {
+        form: form,
+        inputs: getInputsArr(form, inputClass),
+        btnsubmit: form.querySelector(btnSubmitClass)
+    };
 }
 
 
 //Переключение состояния кнопки
-function switchBtn(btn, disabled) {
+function switchBtn(btn, btnDisableClass, disabled) {
     disabled ?
         btn.classList.add(btnDisableClass) :
         btn.classList.remove(btnDisableClass);
@@ -57,61 +26,87 @@ function getErrMsgField(form, input) {
     return form.querySelector(`#${input.id}-errmsg`)
 }
 
-//Вывести сообщение об ошибке и изменить стиль инпута
-function showInputError(inputObj) {
-    if (!inputObj.input.validity.valid) {
-        inputObj.errMsg.textContent = inputObj.input.validationMessage;
-        inputObj.input.classList.add(inputErrClass);
+//Bзменить стиль инпута
+function showInputError(inputElement, inputErrClass) {
+    if (inputElement.validity.valid) {
+        inputElement.classList.add(inputErrClass);
     }
-    return false;
+}
+
+//Показать сообщение об ошибке
+function showErrMsg(errMsgElement, msgText) {
+    errMsgElement.textContent = msgText;
 }
 
 //Спрятать сообщение об ошибке и изменить стиль инпута
-function hideInputError(inputObj) {
-    if (inputObj.input.validity.valid) {
-        inputObj.errMsg.textContent = "";
-        inputObj.input.classList.remove(inputErrClass);
+function hideInputError(inputElement, inputErrClass) {
+    if (inputElement.validity.valid) {
+        inputElement.classList.remove(inputErrClass);
     }
 }
 
+//Спрятать сообщение об ошибке
+function hideErrMsg(errMsgElement) {
+    errMsgElement.textContent = "";
+}
+
+
 //Выполнить проверку формы и влкючить/отключить кнопку
-function validateForm(formСontent) {
-    const isInvalid = formСontent.inputs.some((obj) => {
-        return !obj.input.validity.valid;
+function validateForm(inputsArray, btnSubmit, btnDisableClass) {
+    const isInvalid = inputsArray.some((inputElement) => {
+        return !inputElement.validity.valid;
     });
 
     if (isInvalid) {
-        switchBtn(formСontent.btnSave, true);
+        switchBtn(btnSubmit, btnDisableClass, true);
     } else {
-        switchBtn(formСontent.btnSave, false);
+        switchBtn(btnSubmit, btnDisableClass, false);
     }
 }
 
 //Добавить каждому полю проверку
-function setInputValidation(formСontent) {
-    formСontent.inputs.forEach((obj) => {
-        obj.input.addEventListener('input', () => {
-            if (!obj.input.validity.valid) {
-                showInputError(obj);
-                isInvalid = true;
-            } else {
-                hideInputError(obj);
-            }
-        })
-    });
+function setInputValidation(inputElement, inputErrClass, errMsgElement) {
+    inputElement.addEventListener('input', () => {
+        if (!inputElement.validity.valid) {
+            showInputError(inputElement, "arse");
+            showErrMsg(errMsgElement, inputElement)
+        } else {
+            hideInputError(inputElement, inputErrClass);
+            hideErrMsg(errMsgElement)
+        }
+    })
 }
 
-const formsContent = getFormsContent();// Получаем все элементы форм
 
-//Назначаем каждой форме 
-formsContent.forEach((formContentElement) => {
-    formContentElement.form.addEventListener('input', () => {
-        validateForm(formContentElement);
+function enableValidation(popupElement, { formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass }) {
+    const form = popupElement.querySelector(formSelector);
+    const formContent = getFormContent(form, inputSelector, submitButtonSelector);
+
+    form.addEventListener('input', () => {
+        validateForm(formContent.inputs, formContent.btnsubmit, inactiveButtonClass);
     })
-    setInputValidation(formContentElement);
-    validateForm(formContentElement);//Первичная валидация
-})
 
+    formContent.inputs.forEach((inputElement) => {
+        setInputValidation(inputElement, inputErrorClass, getErrMsgField(form,inputElement));
+    })
 
+    validateForm(formContent.inputs, formContent.btnsubmit, inactiveButtonClass);//Первичная валидация
+}
+
+enableValidation(document.querySelector('.popup-card'), {
+    formSelector: '.popup__window',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button_type_save',
+    inactiveButtonClass: 'popup__button_state-disabled',
+    inputErrorClass: 'popup__input_validity-invalid',
+});
+
+enableValidation(document.querySelector('.popup-profile'), {
+    formSelector: '.popup__window',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button_type_save',
+    inactiveButtonClass: 'popup__button_state-disabled',
+    inputErrorClass: 'popup__input_validity-invalid',
+});
 
 
