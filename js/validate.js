@@ -15,14 +15,14 @@ function getFormInputs(form) {
         inputs.push({
             input: inputElement,
             errMsg: getErrMsgField(form, inputElement)
-        })
+        });
     })
     return inputs;
 }
 
 //Получить массив форм со всеми необходимыми элементами
 function getFormsContent() {
-    let formsContent = [];
+    const formsContent = [];
     forms.forEach((formElement) => {
         formsContent.push({
             form: formElement,
@@ -95,7 +95,7 @@ const formsContent = getFormsContent();// Получаем все элемент
 
 //Назначаем каждой форме 
 formsContent.forEach((formContentElement) => {
-    formContentElement.form.addEventListener('input', (evt) => {
+    formContentElement.form.addEventListener('input', () => {
         validateForm(formContentElement);
     })
     setInputValidation(formContentElement);
