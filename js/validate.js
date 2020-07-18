@@ -93,20 +93,14 @@ function enableValidation(popupElement, { formSelector, inputSelector, submitBut
     validateForm(formContent.inputs, formContent.btnsubmit, inactiveButtonClass);//Первичная валидация
 }
 
-enableValidation(document.querySelector('.popup-card'), {
+const popupFormClasses = {
     formSelector: '.popup__window',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button_type_save',
     inactiveButtonClass: 'popup__button_state-disabled',
     inputErrorClass: 'popup__input_validity-invalid',
-});
-
-enableValidation(document.querySelector('.popup-profile'), {
-    formSelector: '.popup__window',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button_type_save',
-    inactiveButtonClass: 'popup__button_state-disabled',
-    inputErrorClass: 'popup__input_validity-invalid',
-});
+};
+enableValidation(document.querySelector('.popup-card'), popupFormClasses);
+enableValidation(document.querySelector('.popup-profile'), popupFormClasses);
 
 
