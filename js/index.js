@@ -1,9 +1,9 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const popupArray = Array.from(document.querySelectorAll('.popup'));//массив со всеми popup
 
 const cardsArea = document.querySelector(".cards");
-const cardTemplate = document.querySelector("#card-template"); //шаблон для карты
 
 const profile = document.querySelector(".profile");
 
@@ -71,7 +71,7 @@ function revertForm(form) {
         return !inputElement.validity.valid;
     });
 
-    if(!isInvalid){ //Убираем ограничение с кнопки если у нас в форме все правильно
+    if (!isInvalid) { //Убираем ограничение с кнопки если у нас в форме все правильно
         submitBtn.classList.remove(popupValidationFields.submitBtn_disClass);
         submitBtn.disabled = false;
     }
@@ -85,7 +85,7 @@ function isPopupActive(popup) {
 //Переключить состояние popup
 function togglePopup(popup) {
     const hasForm = popup.querySelector(popupValidationFields.form);
-    if(!isPopupActive(popup) && hasForm){
+    if (!isPopupActive(popup) && hasForm) {
         revertForm(hasForm); //Производим чистку только в случае если popup не виден (Иначе при его закрытии будет видна очистка полей)
     }
     popup.classList.toggle('popup_visibility-hidden');
@@ -125,7 +125,7 @@ function fillImageZoom(img) {
 
 //Приблизить изображение
 function zoomImage(event) {
-    if(event.target.classList.contains('card__image')){
+    if (event.target.classList.contains('card__image')) {
         fillImageZoom(event.target);
         togglePopup(popupImageZoom);
     }
@@ -204,7 +204,7 @@ popupCard.addEventListener('submit', addNewCard);
 
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
 
-cardsArea.addEventListener('click',zoomImage);
+cardsArea.addEventListener('click', zoomImage);
 
 popupArray.forEach((popupElement) => {
     popupElement.addEventListener('click', backgrndClosePopup);
@@ -215,6 +215,18 @@ let cardList = []; //!!!!!!
 //Добавление базовых карточек на страницу. Массив с карточками в файле startupCardsArray.js
 initialCards.forEach((cardData) => {
     // appendCardLast(createCard(element.title, element.src));
-    cardList.push(new Card(cardData,'#card-template').generateCard())
-    appendCardLast(cardList[cardList.length-1]);
+    cardList.push(new Card(cardData, '#card-template').generateCard())
+    appendCardLast(cardList[cardList.length - 1]);
 });
+
+const popupFormClasses = {
+    formSelector: '.popup__window',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button_type_save',
+    inactiveButtonClass: 'popup__button_state-disabled',
+    inputErrorClass: 'popup__input_validity-invalid',
+};
+
+
+new FormValidator(popupFormClasses, popupCardContent.form).enableValidation();
+new FormValidator(popupFormClasses, popupProfileContent.form).enableValidation();
