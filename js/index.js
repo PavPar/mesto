@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const popupArray = Array.from(document.querySelectorAll('.popup'));//массив со всеми popup
 
 const cardsArea = document.querySelector(".cards");
@@ -123,40 +125,15 @@ function fillImageZoom(img) {
 
 //Приблизить изображение
 function zoomImage(event) {
-    fillImageZoom(event.target);
-    togglePopup(popupImageZoom);
-}
-
-//Поставить лайк карточке вер_2
-function cardLike(event) {
-    if (event.target.classList.contains('card__button_type-like')) {
-        event.target.classList.toggle('card__button_state-selected');
+    if(event.target.classList.contains('card__image')){
+        fillImageZoom(event.target);
+        togglePopup(popupImageZoom);
     }
 }
 
-//Удаление карты 
-function cardDelete(event) {
-    const card = event.target.closest('.card');
-    card.querySelector('.card__image').removeEventListener('click', zoomImage);
-    cardsArea.removeChild(card);
-}
 
-//Создание новой карты
-function createCard(title, imageLink, alt = title) {
-    const newCard = cardTemplate.content.cloneNode(true).querySelector(".card");
+//!Здесь были функции карты 
 
-    newCard.querySelector('.card__title').textContent = title;
-
-    const image = newCard.querySelector('.card__image');
-    image.src = imageLink;
-    image.alt = alt;
-    image.addEventListener('click', zoomImage)
-
-    // newCard.querySelector('.card__button_type-like').addEventListener('click', cardLike);
-    newCard.querySelector('.card__button_type-delete').addEventListener('click', cardDelete, { once: true });
-
-    return newCard;
-}
 
 //Добавление карты в грид на последнию позицию
 function appendCardLast(Card) {
@@ -226,14 +203,18 @@ popupCardContent.btnExit.addEventListener("click", closePopupCard);
 popupCard.addEventListener('submit', addNewCard);
 
 popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
-cardsArea.addEventListener('click', cardLike);
 
+cardsArea.addEventListener('click',zoomImage);
 
 popupArray.forEach((popupElement) => {
     popupElement.addEventListener('click', backgrndClosePopup);
 });
 
+let cardList = []; //!!!!!!
+
 //Добавление базовых карточек на страницу. Массив с карточками в файле startupCardsArray.js
-initialCards.forEach((element) => {
-    appendCardLast(createCard(element.title, element.src));
+initialCards.forEach((cardData) => {
+    // appendCardLast(createCard(element.title, element.src));
+    cardList.push(new Card(cardData,'#card-template').generateCard())
+    appendCardLast(cardList[cardList.length-1]);
 });
