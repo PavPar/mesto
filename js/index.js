@@ -53,29 +53,20 @@ const popupValidationFields = {
     submitBtn_disClass: "popup__button_state-disabled"
 }
 
-//Снимает все что было поставленно на popup в процессе валидации формы
-function revertForm(form) {
-    const inputs = Array.from(form.querySelectorAll(popupValidationFields.input));
-    const errMsg = Array.from(form.querySelectorAll(popupValidationFields.errMsg));
-    const submitBtn = form.querySelector(popupValidationFields.submitBtn);
+const popupFormClasses = {
+    formSelector: '.popup__window',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button_type_save',
+    inactiveButtonClass: 'popup__button_state-disabled',
+    inputErrorClass: 'popup__input_validity-invalid',
+};
 
-    inputs.forEach((inputElement) => {
-        inputElement.classList.remove(popupValidationFields.input_errClass);
-    });
 
-    errMsg.forEach((errMsgElement) => {
-        errMsgElement.textContent = "";
-    });
+const popupCardFormValidator = new FormValidator(popupFormClasses, popupCardContent.form);
+const popupProfileFormValidator = new FormValidator(popupFormClasses, popupProfileContent.form);
 
-    const isInvalid = inputs.some((inputElement) => {
-        return !inputElement.validity.valid;
-    });
-
-    if (!isInvalid) { //Убираем ограничение с кнопки если у нас в форме все правильно
-        submitBtn.classList.remove(popupValidationFields.submitBtn_disClass);
-        submitBtn.disabled = false;
-    }
-}
+popupCardFormValidator.enableValidation();
+popupProfileFormValidator.enableValidation();
 
 //Проверка что popup запущен
 function isPopupActive(popup) {
@@ -84,15 +75,9 @@ function isPopupActive(popup) {
 
 //Переключить состояние popup
 function togglePopup(popup) {
-    const hasForm = popup.querySelector(popupValidationFields.form);
-    if (!isPopupActive(popup) && hasForm) {
-        revertForm(hasForm); //Производим чистку только в случае если popup не виден (Иначе при его закрытии будет видна очистка полей)
-    }
     popup.classList.toggle('popup_visibility-hidden');
     document.addEventListener('keydown', keyClosePopup);
 }
-
-
 
 //Установка новых данных profile
 function setProfileData(event) {
@@ -108,10 +93,10 @@ function fillProfilePopup() {
     popupProfileContent.secondInput.value = profileContent.subtitle.textContent;
 }
 
-
 //Отображение popup для profile
 function createProfilePopup() {
     fillProfilePopup();
+    popupProfileFormValidator.hideAllValidationMessages();    
     togglePopup(popupProfile);
 }
 
@@ -131,10 +116,6 @@ function zoomImage(event) {
     }
 }
 
-
-//!Здесь были функции карты 
-
-
 //Добавление карты в грид на последнию позицию
 function appendCardLast(Card) {
     cardsArea.appendChild(Card);
@@ -147,13 +128,14 @@ function appendCardFirst(Card) {
 
 //Отображения popup для card
 function createCardPopup() {
+    popupCardFormValidator.hideAllValidationMessages();    
     togglePopup(popupCard);
 }
 
 //Добавление новой карточки в блок карт
 function addNewCard(event) {
     event.preventDefault()
-    appendCardFirst(createCard(popupCardContent.firstInput.value, popupCardContent.secondInput.value));
+    appendCardFirst(new Card({ title: popupCardContent.firstInput.value, src: popupCardContent.secondInput.value }, '#card-template').generateCard());
     togglePopup(popupCard);
     popupCardContent.form.reset();//Очистка формы
 }
@@ -210,23 +192,8 @@ popupArray.forEach((popupElement) => {
     popupElement.addEventListener('click', backgrndClosePopup);
 });
 
-let cardList = []; //!!!!!!
-
 //Добавление базовых карточек на страницу. Массив с карточками в файле startupCardsArray.js
 initialCards.forEach((cardData) => {
-    // appendCardLast(createCard(element.title, element.src));
-    cardList.push(new Card(cardData, '#card-template').generateCard())
-    appendCardLast(cardList[cardList.length - 1]);
+    appendCardLast(new Card(cardData, '#card-template').generateCard());
 });
 
-const popupFormClasses = {
-    formSelector: '.popup__window',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button_type_save',
-    inactiveButtonClass: 'popup__button_state-disabled',
-    inputErrorClass: 'popup__input_validity-invalid',
-};
-
-
-new FormValidator(popupFormClasses, popupCardContent.form).enableValidation();
-new FormValidator(popupFormClasses, popupProfileContent.form).enableValidation();

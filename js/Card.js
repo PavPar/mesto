@@ -47,7 +47,6 @@ export default class Card {
     _setEventListeners() {
         this.btnLike = this.card.querySelector(cardTemplateSelectors.btnLike);
         this.btnLike.addEventListener('click', () => this._cardLikeHandler());
-        this.image.addEventListener('click', () => this._zoomCardImage());
         this.card.querySelector(cardTemplateSelectors.btnDelete)
             .addEventListener('click', (event) => this._cardDeleteHandler(event.target), { once: true });
     }

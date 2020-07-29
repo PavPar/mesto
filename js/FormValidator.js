@@ -60,16 +60,12 @@ export default class FormValidator {
 
     //Изменить стиль инпута
     _showInputError(inputElement) {
-        if (!inputElement.validity.valid) {
-            inputElement.classList.add(this.inputErrorClass);
-        }
+        inputElement.classList.add(this.inputErrorClass);
     }
 
     //Спрятать сообщение об ошибке и изменить стиль инпута
     _hideInputError(inputElement) {
-        if (inputElement.validity.valid) {
-            inputElement.classList.remove(this.inputErrorClass);
-        }
+        inputElement.classList.remove(this.inputErrorClass);
     }
 
     //Показать сообщение об ошибке
@@ -107,5 +103,16 @@ export default class FormValidator {
         this.btnSubmit = this.form.querySelector(this.submitButtonSelector);
         this._setEventListeners();
         this._validateForm() //Первичная валидация
+    }
+
+    //Метод, позволяющий спрятать все сообщения об ошибках, 
+    //но все равно производящий валидацию полей и включение/отключение кнопок
+    hideAllValidationMessages() {
+        this._validateForm(); //Сначала производим валидацию, а потом прячим сообщения об ошибках
+        this.inputsArray.forEach((inputElement) => {
+            this._hideInputError(inputElement);
+            this._hideErrMsg(this._getErrMsgField(inputElement));
+        })
+
     }
 }
