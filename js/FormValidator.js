@@ -1,11 +1,10 @@
 /*
 Класс FormValidator - настраивает валидацию полей формы
-    принимает в конструктор объект настроек с селекторами и классами формы;+
-    принимает вторым параметром элемент той формы, которая валидируется;+
+    принимает в конструктор объект настроек с селекторами и классами формы;
+    принимает вторым параметром элемент той формы, которая валидируется;
     имеет приватные методы, которые обрабатывают форму: проверяют валидность поля, изменяют состояние кнопки сабмита,
-     устанавливают все обработчики;
+    устанавливают все обработчики;
     имеет один публичный метод enableValidation, который включает валидацию формы.
-    Для каждой проверяемой формы создайте экземпляр класса FormValidator
 
     Поля config:
 
@@ -53,6 +52,7 @@ export default class FormValidator {
         });
     }
 
+    //Валидация формы и отключение кнопки если хотя бы одно поля не правильное
     _validateForm() {
         this._setSubmitBtnActive(this._isFormInvalid());
     }
@@ -78,6 +78,7 @@ export default class FormValidator {
         errMsgElement.textContent = "";
     }
 
+    //Установить слушатели событий на форму
     _setEventListeners() {
         this.form.addEventListener('input', () => {
             this._validateForm();
@@ -98,6 +99,7 @@ export default class FormValidator {
         });
     }
 
+    //Включить валидацию формы
     enableValidation() {
         this.inputsArray = this._getInputsArr();
         this.btnSubmit = this.form.querySelector(this.submitButtonSelector);
@@ -108,7 +110,7 @@ export default class FormValidator {
     //Метод, позволяющий спрятать все сообщения об ошибках, 
     //но все равно производящий валидацию полей и включение/отключение кнопок
     hideAllValidationMessages() {
-        this._validateForm(); //Сначала производим валидацию, а потом прячим сообщения об ошибках
+        this._validateForm();
         this.inputsArray.forEach((inputElement) => {
             this._hideInputError(inputElement);
             this._hideErrMsg(this._getErrMsgField(inputElement));

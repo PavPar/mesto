@@ -1,6 +1,6 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import initialCards from './startupCardsArray.js';
+import Card from './Card.js'; // Класс card для создания карточек
+import FormValidator from './FormValidator.js'; //Класс для валидации формы
+import initialCards from './startupCardsArray.js'; // Модуль с первичными карточками
 
 const popupArray = Array.from(document.querySelectorAll('.popup'));//массив со всеми popup
 
@@ -97,7 +97,7 @@ function fillProfilePopup() {
 //Отображение popup для profile
 function createProfilePopup() {
     fillProfilePopup();
-    popupProfileFormValidator.hideAllValidationMessages();    
+    popupProfileFormValidator.hideAllValidationMessages();//Перед показом карточки, прячем все срообщения об ошибке    
     togglePopup(popupProfile);
 }
 
@@ -129,7 +129,7 @@ function appendCardFirst(Card) {
 
 //Отображения popup для card
 function createCardPopup() {
-    popupCardFormValidator.hideAllValidationMessages();    
+    popupCardFormValidator.hideAllValidationMessages();//Перед показом карточки, прячем все срообщения об ошибке
     togglePopup(popupCard);
 }
 
@@ -193,7 +193,7 @@ popupArray.forEach((popupElement) => {
     popupElement.addEventListener('click', backgrndClosePopup);
 });
 
-//Добавление базовых карточек на страницу. Массив с карточками в файле startupCardsArray.js
+//Добавление базовых карточек на страницу. Массив с карточками в модуле startupCardsArray.js
 initialCards.forEach((cardData) => {
     appendCardLast(new Card(cardData, '#card-template').generateCard());
 });
