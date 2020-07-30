@@ -45,15 +45,6 @@ const popupImageZoomContent = {
     image: popupImageZoom.querySelector('.popup__image')
 }
 
-const popupValidationFields = {
-    form: ".popup__window",
-    input: ".popup__input",
-    errMsg: ".popup__errmsg",
-    submitBtn: ".popup__button_type_save",
-    input_errClass: "popup__input_validity-invalid",
-    submitBtn_disClass: "popup__button_state-disabled"
-}
-
 const popupFormClasses = {
     formSelector: '.popup__window',
     inputSelector: '.popup__input',
@@ -61,7 +52,6 @@ const popupFormClasses = {
     inactiveButtonClass: 'popup__button_state-disabled',
     inputErrorClass: 'popup__input_validity-invalid',
 };
-
 
 const popupCardFormValidator = new FormValidator(popupFormClasses, popupCardContent.form);
 const popupProfileFormValidator = new FormValidator(popupFormClasses, popupProfileContent.form);
