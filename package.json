@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/PavPar/mesto/issues"
   },
-  "homepage": "https://github.com/PavPar/mesto#readme"
+  "homepage": "https://github.com/PavPar/mesto#readme",
+  "devDependencies": {
+    "eslint": "^7.6.0"
+  }
 }
