@@ -1,0 +1,6 @@
+Команды 
+
+npm install --save-dev eslint
+npm install --save-dev webpack
+npm i webpack-cli --save-dev
+npm i webpack-dev-server --save-dev

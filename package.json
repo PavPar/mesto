@@ -4,7 +4,10 @@
   "description": "Yandex Praktikum",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-raw": "webpack",
+    "build": "rd /s /q dist && webpack",
+    "server-start": "start cmd /k \"color 80 && npm run server-init\"",
+    "server-init": "webpack-dev-server --open --watch"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,9 @@
   },
   "homepage": "https://github.com/PavPar/mesto#readme",
   "devDependencies": {
-    "eslint": "^7.6.0"
+    "eslint": "^7.6.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
