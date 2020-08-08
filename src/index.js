@@ -1,6 +1,6 @@
-import Card from './Card.js'; // Класс card для создания карточек
-import FormValidator from './FormValidator.js'; //Класс для валидации формы
-import initialCards from './startupCardsArray.js'; // Модуль с первичными карточками
+import Card from './components/Card.js'; // Класс card для создания карточек
+import FormValidator from './components/FormValidator.js'; //Класс для валидации формы
+import initialCards from './utils/startupCardsArray.js'; // Модуль с первичными карточками
 
 const popupArray = Array.from(document.querySelectorAll('.popup'));//массив со всеми popup
 
@@ -67,7 +67,7 @@ function isPopupActive(popup) {
 //Переключить состояние popup
 function togglePopup(popup) {
     popup.classList.toggle('popup_visibility-hidden');
-    document.addEventListener('keydown', keyClosePopup);
+    popup.addEventListener('keydown', keyClosePopup);
 }
 
 //Установка новых данных profile
