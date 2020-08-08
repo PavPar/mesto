@@ -23,9 +23,10 @@ const cardTemplateSelectors = {
 };
 
 export default class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
         this.data = data;
         this.templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     //Установщик данных картчоки
@@ -45,7 +46,7 @@ export default class Card {
     _cardDeleteHandler(target) {
         const domCard = target.closest(cardTemplateSelectors.card);
         const cardParent = domCard.parentNode;
-        cardParent.removeChild(domCard); 
+        cardParent.removeChild(domCard);
     }
 
     //Установка слушателей событий
@@ -54,6 +55,7 @@ export default class Card {
         this.btnLike.addEventListener('click', () => this._cardLikeHandler());
         this.card.querySelector(cardTemplateSelectors.btnDelete)
             .addEventListener('click', (event) => this._cardDeleteHandler(event.target), { once: true });
+        this.image.addEventListener('click',this._handleCardClick);
     }
 
     //Генерация карты 
