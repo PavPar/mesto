@@ -24,15 +24,14 @@ export default class Section {
     renderItems(){
         this.clear();
         this._itemsArr.forEach(item => {
-            this._renderer(item);
+            this._container.appendChild(this._renderer(item));
         });
     }
 
     //Добавление отдельного элемента
     addItem(item){
         this._itemsArr.push(item); 
-        //this._container.appendChild(item);
-        this._renderer(item);
+        this._container.appendChild(this._renderer(item));
     }
 
     //Очистка контейнира

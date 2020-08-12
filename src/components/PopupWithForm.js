@@ -17,7 +17,7 @@ const popupSelectorConst = {
     submitButtonSelector: '.popup__button_type_save',
 };
 
-import Popup from "./Popup";
+import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, submitAction) {

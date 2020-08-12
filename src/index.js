@@ -1,12 +1,18 @@
 import Card from './components/Card.js'; // Класс card для создания карточек
 import FormValidator from './components/FormValidator.js'; //Класс для валидации формы
 import initialCards from './utils/startupCardsArray.js'; // Модуль с первичными карточками
-import Popup from './utils/Popup.js';
-import PopupWithForm from './utils/PopupWithForm.js';
-import PopupWithImage from './utils/PopupWithImage.js';
-import Section from './utils/Section.js';
-import UserInfo from './utils/UserInfo.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import Section from './components/Section.js';
+import UserInfo from './components/UserInfo.js';
 
+const cardsContainer = new Section({
+    items: initialCards.reverse(), renderer: (item) => {
+        return new Card({ title: item.title, src: item.src }, '#card-template').generateCard();
+    }
+}, ".cards");
+
+cardsContainer.renderItems();
 
 const popupArray = Array.from(document.querySelectorAll('.popup'));//массив со всеми popup
 
@@ -113,11 +119,6 @@ function zoomImage(event) {
     }
 }
 
-//Добавление карты в грид на последнию позицию
-function appendCardLast(Card) {
-    cardsArea.appendChild(Card);
-}
-
 //Добавление карты в грид на первую позицию
 function appendCardFirst(Card) {
     cardsArea.insertBefore(Card, cardsArea.firstChild)
@@ -188,11 +189,4 @@ cardsArea.addEventListener('click', zoomImage);
 popupArray.forEach((popupElement) => {
     popupElement.addEventListener('click', backgrndClosePopup);
 });
-
-//Добавление базовых карточек на страницу. Массив с карточками в модуле startupCardsArray.js
-initialCards.forEach((cardData) => {
-    appendCardLast(new Card(cardData, '#card-template').generateCard());
-});
-
-/*---*/
 
