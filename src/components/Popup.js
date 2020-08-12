@@ -16,7 +16,6 @@ const popupConst = {
 export default class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
-        this._setEventListeners();
     }
 
     open() {
@@ -38,7 +37,8 @@ export default class Popup {
             }
         });
 
-        this._popup.querySelector(`.${popupConst.popupCrossClass}`).addEventListener('click', () => {
+        this._popup.querySelector(`.${popupConst.popupCrossClass}`).addEventListener('click', evt => {
+            evt.preventDefault();
             this.close();
         });
     }

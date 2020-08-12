@@ -34,11 +34,11 @@
         <form class="popup__window" novalidate name="popup__profile-form">
             <h2 class="popup__title">Редактировать профиль</h2>
             <input class="popup__input popup__input-title" id="popup__input-title" type="text" required minlength="2"
-                maxlength="40">
+                maxlength="40" name="userName">
             <label for="popup__input-title" class="popup__errmsg" id="popup__input-title-errmsg"></label>
 
             <input class="popup__input popup__input-subtitle" id="popup__input-subtitle" type="text" required
-                minlength="2" maxlength="200">
+                minlength="2" maxlength="200" name="userInfo">
             <label for="popup__input-subtitle" class="popup__errmsg" id="popup__input-subtitle-errmsg"></label>
 
             <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
@@ -51,11 +51,11 @@
         <form class="popup__window" novalidate name="popup__card-form">
             <h2 class="popup__title">Новое место</h2>
             <input class="popup__input popup__input-card-title" id="popup__input-card-title" type="text" required
-                placeholder="Название" minlength="1" maxlength="30">
+                placeholder="Название" minlength="1" maxlength="30" name="title">
             <label for="popup__input-card-title" class="popup__errmsg" id="popup__input-card-title-errmsg"></label>
 
             <input class="popup__input popup__input-card-link" id="popup__input-card-link" type="url" required
-                placeholder="Ссылка на изображение">
+                placeholder="Ссылка на изображение" name="link">
             <label for="popup__input-title" class="popup__errmsg" id="popup__input-card-link-errmsg"></label>
 
             <button class="popup__button popup__button_type_save" type="submit">Создать</button>
