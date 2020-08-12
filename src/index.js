@@ -1,6 +1,12 @@
 import Card from './components/Card.js'; // Класс card для создания карточек
 import FormValidator from './components/FormValidator.js'; //Класс для валидации формы
 import initialCards from './utils/startupCardsArray.js'; // Модуль с первичными карточками
+import Popup from './utils/Popup.js';
+import PopupWithForm from './utils/PopupWithForm.js';
+import PopupWithImage from './utils/PopupWithImage.js';
+import Section from './utils/Section.js';
+import UserInfo from './utils/UserInfo.js';
+
 
 const popupArray = Array.from(document.querySelectorAll('.popup'));//массив со всеми popup
 
@@ -187,4 +193,6 @@ popupArray.forEach((popupElement) => {
 initialCards.forEach((cardData) => {
     appendCardLast(new Card(cardData, '#card-template').generateCard());
 });
+
+/*---*/
 
