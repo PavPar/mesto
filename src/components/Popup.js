@@ -20,32 +20,32 @@ export default class Popup {
     }
 
     open() {
-        this._popup.classList.add(popupConst.popupHiddenClass);
-    }
-
-    close() {
         this._popup.classList.remove(popupConst.popupHiddenClass);
     }
 
-    setEventListeners() {
+    close() {
+        this._popup.classList.add(popupConst.popupHiddenClass);
+    }
+
+    _setEventListeners() {
         document.addEventListener('keydown', evt => {
             this._handleEscClose(evt.key);
         });
 
         document.addEventListener('click', evt => {
             if (evt.target.classList.contains(popupConst.popupClass)) {
-                this._close();
+                this.close();
             }
         });
 
-        this._popup.querySelector(popupConst.popupCrossClass).addEventListener('click', () => {
-            this._close();
+        this._popup.querySelector(`.${popupConst.popupCrossClass}`).addEventListener('click', () => {
+            this.close();
         });
     }
 
     _handleEscClose(key) {
-        if (key === "Escape") {
-            this._popup.classList.remove(popupConst.popupHiddenClass);
+        if (key === "Escape" &&  !this._popup.classList.contains(popupConst.popupHiddenClass)) {
+            this._popup.classList.add(popupConst.popupHiddenClass);
         }
     }
 }

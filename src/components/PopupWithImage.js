@@ -10,17 +10,17 @@ const popupConst = {
 }
 
 export default class PopupWithImage extends Popup {
-    constructor(popupSelector) {
+    constructor(popupSelector, imageData) {
         super(popupSelector);
-        this._image = this._popup.querySelector(popupConst.imageSelector);
-        this._subtitle = this._popup.querySelector(popupConst.subtitleSelector);
+        this._imageElement = this._popup.querySelector(popupConst.imageSelector);
+        this._subtitleElement = this._popup.querySelector(popupConst.subtitleSelector);
+        this._imageData = imageData;
     }
-    
+
     open() {
-        const alt = this._image.getAttribute("alt");
-        this._subtitle.textContent = alt;
-        popupConst.image.alt = alt;
-        popupConst.image.src = this._image.src;
+        this._subtitleElement.textContent = this._imageData.title;
+        this._imageElement.alt = this._imageData.title;
+        this._imageElement.src = this._imageData.src;
         super.open();
     }
 }

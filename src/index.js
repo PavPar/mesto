@@ -8,7 +8,12 @@ import UserInfo from './components/UserInfo.js';
 
 const cardsContainer = new Section({
     items: initialCards.reverse(), renderer: (item) => {
-        return new Card({ title: item.title, src: item.src }, '#card-template').generateCard();
+        const popupImage = new PopupWithImage(".popup_type-imgZoom", { title: item.title, src: item.src })
+        return new Card({
+            title: item.title, src: item.src
+        }, '#card-template', () => {
+            popupImage.open();
+        }).generateCard();
     }
 }, ".cards");
 
@@ -47,14 +52,6 @@ const popupProfileContent = {
     firstInput: popupProfile.querySelector('.popup__input-title'),
     secondInput: popupProfile.querySelector('.popup__input-subtitle'),
     form: popupProfile.querySelector('.popup__window'),
-}
-
-const popupImageZoom = document.querySelector(".popup_type-imgZoom");
-
-const popupImageZoomContent = {
-    btnExit: popupImageZoom.querySelector(".popup__button_type_exit"),
-    subtitle: popupImageZoom.querySelector('.popup__subtitle'),
-    image: popupImageZoom.querySelector('.popup__image')
 }
 
 const popupFormClasses = {
@@ -173,20 +170,20 @@ function backgrndClosePopup(evt) {
     }
 }
 
-profileContent.btnEdit.addEventListener("click", createProfilePopup);
-profileContent.btnAdd.addEventListener("click", createCardPopup);
+// profileContent.btnEdit.addEventListener("click", createProfilePopup);
+// profileContent.btnAdd.addEventListener("click", createCardPopup);
 
-popupProfileContent.btnExit.addEventListener("click", closePopupProfile);
-popupProfile.addEventListener('submit', setProfileData);
+// popupProfileContent.btnExit.addEventListener("click", closePopupProfile);
+// popupProfile.addEventListener('submit', setProfileData);
 
-popupCardContent.btnExit.addEventListener("click", closePopupCard);
-popupCard.addEventListener('submit', addNewCard);
+// popupCardContent.btnExit.addEventListener("click", closePopupCard);
+// popupCard.addEventListener('submit', addNewCard);
 
-popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
+// popupImageZoomContent.btnExit.addEventListener('click', closePopupImgZoom);
 
-cardsArea.addEventListener('click', zoomImage);
+// cardsArea.addEventListener('click', zoomImage);
 
-popupArray.forEach((popupElement) => {
-    popupElement.addEventListener('click', backgrndClosePopup);
-});
+// popupArray.forEach((popupElement) => {
+//     popupElement.addEventListener('click', backgrndClosePopup);
+// });
 
