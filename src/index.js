@@ -6,21 +6,21 @@ import PopupWithImage from './components/PopupWithImage.js';
 import Section from './components/Section.js';
 import UserInfo from './components/UserInfo.js';
 
-const cardsContainer = new Section({
-    items: initialCards, renderer: (item) => {
-        const popupImage = new PopupWithImage(".popup_type-imgZoom", { title: item.title, src: item.src })
-        return new Card({
-            title: item.title, src: item.src
-        }, '#card-template', () => {
-            popupImage.open();
-        }).generateCard();
-    }
-}, ".cards");
+function createCard(cardData) {
+    const popupImage = new PopupWithImage(".popup_type-imgZoom", { title: cardData.title, src: cardData.src })
+    return new Card({ title: cardData.title, src: cardData.src }, '#card-template', () => {
+        popupImage.open();
+    }).generateCard();
+}
+
+const cardsContainer = new Section({items: initialCards, renderer: (itemData) => {
+    return createCard(itemData);
+}}, ".cards");
 
 cardsContainer.renderItems();
 
 const popupCard = new PopupWithForm('.popup-card', (inputData) => {
-    cardsContainer.addItem(new Card({ title: inputData.title, src: inputData.link }, '#card-template').generateCard())
+    cardsContainer.addItem(createCard(inputData))
 });
 
 const profileUserInfo = new UserInfo({ userNameSelector: ".profile__title", userInfoSelector: ".profile__subtitle" });

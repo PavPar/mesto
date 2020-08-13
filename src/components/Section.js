@@ -31,7 +31,7 @@ export default class Section {
     //Добавление отдельного элемента
     addItem(item) {
         this._itemsArr.push(item);
-        this._container.insertBefore(this._renderer(item), this._container.firstChild);
+        this._container.insertBefore(item, this._container.firstChild);
     }
 
     //Очистка контейнира
