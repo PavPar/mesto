@@ -52,11 +52,11 @@ const popupFormClasses = {
     inputErrorClass: 'popup__input_validity-invalid',
 };
 
-// const popupCardFormValidator = new FormValidator(popupFormClasses, popupCardContent.form);
-// const popupProfileFormValidator = new FormValidator(popupFormClasses, popupProfileContent.form);
+const popupCardFormValidator = new FormValidator(popupFormClasses, popupCard.popup.querySelector('.popup__window'));
+const popupProfileFormValidator = new FormValidator(popupFormClasses, popupProfile.popup.querySelector('.popup__window'));
 
-// popupCardFormValidator.enableValidation();
-// popupProfileFormValidator.enableValidation();
+popupCardFormValidator.enableValidation();
+popupProfileFormValidator.enableValidation();
 
 //Проверка что popup запущен
 function isPopupActive(popup) {
@@ -159,7 +159,10 @@ profileContent.btnEdit.addEventListener("click", () => {
     const userInfo = profileUserInfo.getUserInfo();
     popupProfile.popup.querySelector('.popup__input-title').value = userInfo.userName;
     popupProfile.popup.querySelector('.popup__input-subtitle').value = userInfo.userInfo;
+    popupProfileFormValidator.enableValidation();
+    popupProfileFormValidator.hideAllValidationMessages();
     popupProfile.open();
+    
 });
 
 // popupProfileContent.btnExit.addEventListener("click", closePopupProfile);
