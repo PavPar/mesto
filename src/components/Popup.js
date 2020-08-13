@@ -15,15 +15,15 @@ const popupConst = {
 
 export default class Popup {
     constructor(popupSelector) {
-        this._popup = document.querySelector(popupSelector);
+        this.popup = document.querySelector(popupSelector);
     }
 
     open() {
-        this._popup.classList.remove(popupConst.popupHiddenClass);
+        this.popup.classList.remove(popupConst.popupHiddenClass);
     }
 
     close() {
-        this._popup.classList.add(popupConst.popupHiddenClass);
+        this.popup.classList.add(popupConst.popupHiddenClass);
     }
 
     _setEventListeners() {
@@ -37,15 +37,15 @@ export default class Popup {
             }
         });
 
-        this._popup.querySelector(`.${popupConst.popupCrossClass}`).addEventListener('click', evt => {
+        this.popup.querySelector(`.${popupConst.popupCrossClass}`).addEventListener('click', evt => {
             evt.preventDefault();
             this.close();
         });
     }
 
     _handleEscClose(key) {
-        if (key === "Escape" &&  !this._popup.classList.contains(popupConst.popupHiddenClass)) {
-            this._popup.classList.add(popupConst.popupHiddenClass);
+        if (key === "Escape" &&  !this.popup.classList.contains(popupConst.popupHiddenClass)) {
+            this.popup.classList.add(popupConst.popupHiddenClass);
         }
     }
 }

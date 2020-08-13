@@ -12,16 +12,17 @@ export default class UserInfo {
     constructor({ userNameSelector, userInfoSelector }) {
         this._userNameElement = document.querySelector(userNameSelector);
         this._userInfoElement = document.querySelector(userInfoSelector);
-        this._userData = {}; //Инициализируем пустой объект userData;
     }
 
-    setUserInfo({name,info}){
-        this._userData = {name:name,info: info};
-        this._userNameElement.textContent = this._userData.name;
-        this._userInfoElement.textContent = this._userData.info;
+    setUserInfo({ userName, userInfo }) {
+        this._userNameElement.textContent = userName;
+        this._userInfoElement.textContent = userInfo;
     }
 
-    getUserInfo(){
-        return this._userData;
+    getUserInfo() {
+        return {
+            userName: this._userNameElement.textContent,
+            userInfo: this._userInfoElement.textContent
+        };
     }
 }

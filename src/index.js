@@ -153,20 +153,13 @@ function keyClosePopup(evt) {
     }
 }
 
-//Закрыть popup кликом по фону
-function backgrndClosePopup(evt) {
-    if (evt.target.classList.contains("popup")) {
-        togglePopup(evt.target);
-    }
-}
-
 profileContent.btnAdd.addEventListener("click", () => { popupCard.open() });
 
 profileContent.btnEdit.addEventListener("click", () => {
     const userInfo = profileUserInfo.getUserInfo();
-    //!!
+    popupProfile.popup.querySelector('.popup__input-title').value = userInfo.userName;
+    popupProfile.popup.querySelector('.popup__input-subtitle').value = userInfo.userInfo;
     popupProfile.open();
-
 });
 
 // popupProfileContent.btnExit.addEventListener("click", closePopupProfile);

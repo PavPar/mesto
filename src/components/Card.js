@@ -61,7 +61,7 @@ export default class Card {
     //Генерация карты 
     generateCard() {
         this.card = document.querySelector(this.templateSelector).content.cloneNode(true);
-        this._setCardData(this.data.alt);
+        this._setCardData();
         this._setEventListeners();
         return this.card;
     }
