@@ -1,6 +1,23 @@
+goto start
+
 Команды 
+
+- eslint - проверка синтекса кода
+- webpack - сборщик
+- webpack-cli - клиент сборщика
+- webpack-dev-server - сервер на localhost
+- babel - перевод в старый синтаксис
+- core.js - библиотека полифилов (babel) 
+- babel-loader - связь babel с webpack
+
+:start
 
 npm install --save-dev eslint
 npm install --save-dev webpack
 npm i webpack-cli --save-dev
 npm i webpack-dev-server --save-dev
+npm i @babel/core --save-dev
+npm i @babel/preset-env --save-dev
+npm i core-js --save
+npm i babel-loader --save-dev
+
