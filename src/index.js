@@ -13,7 +13,7 @@ import {
     formValidatorConfig,
     profileSelectors,
     initialCards
-} from './utils/constants.js' //Импорт констант
+} from './utils/constants.js';
 
 //Функция для создания карты с изображением 
 function createCard(cardData) {

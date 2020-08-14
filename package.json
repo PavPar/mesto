@@ -6,7 +6,7 @@
   "scripts": {
     "build-raw": "webpack",
     "build": "rd /s /q dist && webpack",
-    "server-start": "start cmd /k \"color 80 && npm run server-init\"",
+    "dev": "start cmd /k \"color 80 && npm run server-init\"",
     "server-init": "webpack-dev-server --open --watch"
   },
   "repository": {
