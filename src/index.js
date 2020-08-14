@@ -1,3 +1,5 @@
+import './pages/index.css';
+
 import Card from './components/Card.js'; // Класс card для создания карточек
 import FormValidator from './components/FormValidator.js'; //Класс для валидации формы
 import Section from './components/Section.js'; // Класс для размещения объектов на странице
