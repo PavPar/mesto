@@ -14,11 +14,15 @@ goto start
 - html-loader - выполняет анализ файла html и представляет правильные пути файлов
 - css-loader - загрузчик css
 - mini-css-extract-plugin - производит объединение всех css в один файл
+- postcss - подключатель к webpack
+- autoprefixer - вендорные префиксы
+- cssnano - минификация css
 
-Если
+Заметки
 
-npm install @types/mini-css-extract-plugin
-
+- Если mini-css-extract-plugin не читается:  npm install @types/mini-css-extract-plugin
+- В html файле не должно быть script иначе проект просто не скомпилируется когда 
+будет собираться html файл
 :start
 
 npm install --save-dev eslint
@@ -34,3 +38,6 @@ npm i file-loader --save-dev
 npm i html-loader --save-dev
 npm i css-loader --save-dev
 npm i mini-css-extract-plugin --save-dev
+npm i postcss-loader --save-dev
+npm i autoprefixer --save-dev
+npm i cssnano --save-dev
