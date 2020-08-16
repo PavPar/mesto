@@ -34,7 +34,7 @@ const cardsContainer = new Section({
 
 const popupCard = new PopupWithForm(popupTypeSelectors.popupCard, (inputData) => {
     cardsContainer.addItem(createCard(inputData))
-    this.close();
+    popupCard.close();
 });
 
 const profileUserInfo = new UserInfo({
