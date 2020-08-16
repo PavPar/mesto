@@ -1,0 +1,21 @@
+@import url(../vendor/normalize.css);
+@import url(../fonts/Inter/inter.css);
+@import url(../blocks/page/page.css);
+/*Header*/
+@import url(../blocks/header/header.css);
+/*Content*/
+@import url(../blocks/content/content.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/card/card.css);
+/*Footer*/
+@import url(../blocks/footer/footer.css);
+/* Popup */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_visibility/popup_visibility-hidden.css);
+@import url(../blocks/popup/_visibility/popup_visibility-invisible.css);
+/* Image zoom */
+@import url(../blocks/popup/_type/popup_type-imgZoom.css);
+/* Animations */
+@import url(../animations/fade-in.css);
+@import url(../animations/fade-out.css);

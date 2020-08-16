@@ -14,14 +14,12 @@ export default class PopupWithImage extends Popup {
         super(popupSelector);
         this._imageElement = this.popup.querySelector(popupConst.imageSelector);
         this._subtitleElement = this.popup.querySelector(popupConst.subtitleSelector);
-        this._imageData = imageData;
-        this._setEventListeners();
     }
 
-    open() {
-        this._subtitleElement.textContent = this._imageData.title;
-        this._imageElement.alt = this._imageData.title;
-        this._imageElement.src = this._imageData.src;
+    open({ title = "", src = "" }) {
+        this._subtitleElement.textContent = title;
+        this._imageElement.alt = title;
+        this._imageElement.src = src;
         super.open();
     }
 }
