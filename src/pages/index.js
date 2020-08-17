@@ -1,4 +1,4 @@
-import '../styles/index.css';
+import './index.css';
 
 import Card from '../components/Card.js'; // Класс card для создания карточек
 import FormValidator from '../components/FormValidator.js'; //Класс для валидации формы
