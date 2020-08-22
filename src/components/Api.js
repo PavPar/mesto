@@ -30,5 +30,24 @@ export default class Api {
     getUserInfo() {
         return this._accessServer("GET", "/users/me");
     }
+
+    changeUserInfo({ name, about }) {
+        return fetch(this._options.baseUrl + '/users/me', {
+            method: 'PATCH',
+            headers: this._options.headers,
+            body: JSON.stringify({
+                name: name,
+                about: about
+            })
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject({ status: res.status, msg: res.statusText});
+        }).catch(({status , msg}) => {
+            console.log('Api.js Status : ' + status)
+            console.log('Api.js MSG : ' + msg)
+        })
+    }
 }
 

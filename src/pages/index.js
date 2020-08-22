@@ -15,8 +15,7 @@ import {
     cardTemplateSelector,
     cardContainerSelector,
     formValidatorConfig,
-    profileSelectors,
-    initialCards
+    profileSelectors
 } from '../utils/constants.js';
 
 const api = new Api({
@@ -37,7 +36,7 @@ function createCard(cardData) {
 }
 
 const cardsContainer = new Section({
-    items: initialCards, renderer: (itemData) => {
+    items: [], renderer: (itemData) => {
         return createCard(itemData);
     }
 }, cardContainerSelector);
@@ -53,7 +52,10 @@ const profileUserInfo = new UserInfo({
 });
 
 const popupProfile = new PopupWithForm(popupTypeSelectors.popupProfile, (inputData) => {
-    profileUserInfo.setUserInfo(inputData);
+    // profileUserInfo.setUserInfo(inputData);
+    api.changeUserInfo({ name: inputData.userName, about: inputData.userInfo }).then(({ name, about }) => {
+        profileUserInfo.setUserInfo({ userName: name, userInfo: about });
+    })
     popupProfile.close();
 });
 
@@ -97,4 +99,8 @@ api.getInitialCards().then(res => {
     res.forEach(data => {
         cardsContainer.addItem(createCard({ title: data.name, src: data.link }))
     });
+})
+
+api.getUserInfo().then(res => {
+    profileUserInfo.setUserInfo({ userName: res.name, userInfo: res.about });
 })
