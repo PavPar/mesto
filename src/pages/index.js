@@ -1,5 +1,7 @@
 import './index.css';
 
+import Api from "../components/Api.js";
+
 import Card from '../components/Card.js'; // Класс card для создания карточек
 import FormValidator from '../components/FormValidator.js'; //Класс для валидации формы
 import Section from '../components/Section.js'; // Класс для размещения объектов на странице
@@ -16,6 +18,14 @@ import {
     profileSelectors,
     initialCards
 } from '../utils/constants.js';
+
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+    headers: {
+        authorization: '967deb70-9a4e-4589-809b-0ac8252fbe07',
+        'Content-Type': 'application/json'
+    }
+});
 
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
 
@@ -82,3 +92,9 @@ popupProfile.setEventListeners();
 popupImage.setEventListeners();
 
 cardsContainer.renderItems();
+
+api.getInitialCards().then(res => {
+    res.forEach(data => {
+        cardsContainer.addItem(createCard({ title: data.name, src: data.link }))
+    });
+})
