@@ -3,11 +3,16 @@ export default class Api {
         this._options = options;
     }
 
+    errorMsgHandler({ status, statusText }) {
+        console.log('Api.js Status : ' + status)
+        console.log('Api.js MSG : ' + statusText)
+    }
+
     //Обращаемся к серверу
-    _accessServer(method, url) {
+    _getFromServer(url) {
         return fetch(this._options.baseUrl + url, {
             headers: this._options.headers,
-            method: method
+            method: "GET"
         })
             .then(res => {
                 if (res.ok) {
@@ -18,36 +23,43 @@ export default class Api {
             .then((result) => {
                 return result;
             })
-            .catch((errMsg) => {
-                console.log('API: _accessServer err: ' + errMsg)
-            })
     }
 
-    getInitialCards() {
-        return this._accessServer("GET", "/cards");
-    }
-
-    getUserInfo() {
-        return this._accessServer("GET", "/users/me");
-    }
-
-    changeUserInfo({ name, about }) {
-        return fetch(this._options.baseUrl + '/users/me', {
-            method: 'PATCH',
+    _sendToServer(method, url, bodyObj) {
+        return fetch(this._options.baseUrl + url, {
+            method: method,
             headers: this._options.headers,
-            body: JSON.stringify({
-                name: name,
-                about: about
-            })
+            body: JSON.stringify(bodyObj)
         }).then(res => {
             if (res.ok) {
                 return res.json();
             }
-            return Promise.reject({ status: res.status, msg: res.statusText});
-        }).catch(({status , msg}) => {
-            console.log('Api.js Status : ' + status)
-            console.log('Api.js MSG : ' + msg)
+            return Promise.reject({ status: res.status, msg: res.statusText });
         })
     }
+
+
+    getInitialCards() {
+        return this._getFromServer("/cards");
+    }
+
+    getUserInfo() {
+        return this._getFromServer("/users/me");
+    }
+
+    changeUserInfo({ name, about }) {
+        return this._sendToServer("PATCH", "/users/me", {
+            name: name,
+            about: about
+        })
+    }
+
+    addNewCard({ name, link }) {
+        return this._sendToServer("POST", "/cards", {
+            name: name,
+            link: link
+        })
+    }
+
 }
 

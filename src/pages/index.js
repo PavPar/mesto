@@ -29,9 +29,9 @@ const api = new Api({
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
 
 //Функция для создания карты с изображением 
-function createCard(cardData) {
-    return new Card({ title: cardData.title, src: cardData.src }, cardTemplateSelector, () => {
-        popupImage.open({ title: cardData.title, src: cardData.src });
+function createCard({ title, src }) {
+    return new Card({ title: title, src: src }, cardTemplateSelector, () => {
+        popupImage.open({ title: title, src: src });
     }).generateCard();
 }
 
@@ -42,7 +42,11 @@ const cardsContainer = new Section({
 }, cardContainerSelector);
 
 const popupCard = new PopupWithForm(popupTypeSelectors.popupCard, (inputData) => {
-    cardsContainer.addItem(createCard(inputData))
+    api.addNewCard({ name: inputData.title, link: inputData.src })
+        .then(res => {
+            cardsContainer.addItem(createCard({ title: res.name, src: res.link }));
+        })
+        .catch(err => api.errorMsgHandler(err));
     popupCard.close();
 });
 
@@ -56,6 +60,7 @@ const popupProfile = new PopupWithForm(popupTypeSelectors.popupProfile, (inputDa
     api.changeUserInfo({ name: inputData.userName, about: inputData.userInfo }).then(({ name, about }) => {
         profileUserInfo.setUserInfo({ userName: name, userInfo: about });
     })
+        .catch(err => api.errorMsgHandler(err));
     popupProfile.close();
 });
 
@@ -95,12 +100,16 @@ popupImage.setEventListeners();
 
 cardsContainer.renderItems();
 
-api.getInitialCards().then(res => {
-    res.forEach(data => {
-        cardsContainer.addItem(createCard({ title: data.name, src: data.link }))
-    });
-})
+api.getInitialCards()
+    .then(res => {
+        res.forEach(data => {
+            cardsContainer.addItem(createCard({ title: data.name, src: data.link }))
+        });
+    })
+    .catch(err => api.errorMsgHandler(err));
 
-api.getUserInfo().then(res => {
-    profileUserInfo.setUserInfo({ userName: res.name, userInfo: res.about });
-})
+api.getUserInfo()
+    .then(res => {
+        profileUserInfo.setUserInfo({ userName: res.name, userInfo: res.about });
+    })
+    .catch(err => api.errorMsgHandler(err));
