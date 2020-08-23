@@ -29,18 +29,27 @@ const api = new Api({
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
 
 //Функция для создания карты с изображением 
-function createCard({ title, src, likes }) {
-    return new Card({ title: title, src: src, likes: likes }, cardTemplateSelector,
+function createCard({ _id, name, link, likes }) {
+    return new Card({ title: name, src: link, likes: likes.length, _id: _id }, cardTemplateSelector,
         () => {
-            popupImage.open({ title: title, src: src });
+            popupImage.open({ title: name, src: link });
         },
-        (event) => {
-            if (event.target.classList.contains('card__button_state-selected')) {
-                console.log("a");
+        function (event) {
+            if (!event.target.classList.contains('card__button_state-selected')) {
+                api.likeCard(this.data._id)
+                    .then(res => {
+                        event.target.classList.toggle('card__button_state-selected');
+                        this.setCardLikes(event.target.closest('.card'), res.likes.length);
+                    })
+                    .catch(err => api.errorMsgHandler(err));
             } else {
-                console.log("b");
+                api.dislikeCard(this.data._id)
+                    .then(res => {
+                        event.target.classList.toggle('card__button_state-selected');
+                        this.setCardLikes(event.target.closest('.card'), res.likes.length);
+                    })
+                    .catch(err => api.errorMsgHandler(err));
             }
-            event.target.classList.toggle('card__button_state-selected');
         })
         .generateCard();
 }
@@ -54,7 +63,7 @@ const cardsContainer = new Section({
 const popupCard = new PopupWithForm(popupTypeSelectors.popupCard, (inputData) => {
     api.addNewCard({ name: inputData.title, link: inputData.src })
         .then(res => {
-            cardsContainer.addItem(createCard({ title: res.name, src: res.link, likes: res.likes }));
+            cardsContainer.addItem(createCard(res));
         })
         .catch(err => api.errorMsgHandler(err));
     popupCard.close();
@@ -113,7 +122,8 @@ cardsContainer.renderItems();
 api.getInitialCards()
     .then(res => {
         res.forEach(data => {
-            cardsContainer.addItem(createCard({ title: data.name, src: data.link, likes: data.likes.length}))
+            console.log(data);
+            cardsContainer.addItem(createCard(data))
         });
     })
     .catch(err => api.errorMsgHandler(err));

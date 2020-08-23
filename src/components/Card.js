@@ -37,8 +37,7 @@ export default class Card {
         this.image = this.card.querySelector(cardTemplateSelectors.image);
         this.image.src = this.data.src;
         this.image.alt = alt;
-        this.card.querySelector(cardTemplateSelectors.likeCnt).textContent = this.data.likes;
-        console.log(this.data.likes)
+        this.setCardLikes(this.card, this.data.likes);
     }
 
     // //Обработчик лайка карточки
@@ -55,7 +54,6 @@ export default class Card {
 
     //Установка слушателей событий
     _setEventListeners() {
-
         this.btnLike = this.card.querySelector(cardTemplateSelectors.btnLike);
         this.btnLike.addEventListener('click', this._cardLikeHandler);
         this.card.querySelector(cardTemplateSelectors.btnDelete)
@@ -69,5 +67,9 @@ export default class Card {
         this._setCardData();
         this._setEventListeners();
         return this.card;
+    }
+
+    setCardLikes(cardDOM, likes) {
+        cardDOM.querySelector(cardTemplateSelectors.likeCnt).textContent = likes;
     }
 }

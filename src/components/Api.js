@@ -9,10 +9,10 @@ export default class Api {
     }
 
     //Обращаемся к серверу
-    _getFromServer(url) {
+    _accessServer(method, url) {
         return fetch(this._options.baseUrl + url, {
             headers: this._options.headers,
-            method: "GET"
+            method: method
         })
             .then(res => {
                 if (res.ok) {
@@ -25,7 +25,7 @@ export default class Api {
             })
     }
 
-    _sendToServer(method, url, bodyObj) {
+    _sendDataToServer(method, url, bodyObj) {
         return fetch(this._options.baseUrl + url, {
             method: method,
             headers: this._options.headers,
@@ -40,33 +40,33 @@ export default class Api {
 
 
     getInitialCards() {
-        return this._getFromServer("/cards");
+        return this._accessServer("GET","/cards");
     }
 
     getUserInfo() {
-        return this._getFromServer("/users/me");
+        return this._accessServer("GET","/users/me");
     }
 
     changeUserInfo({ name, about }) {
-        return this._sendToServer("PATCH", "/users/me", {
+        return this._sendDataToServer("PATCH", "/users/me", {
             name: name,
             about: about
         })
     }
 
     addNewCard({ name, link }) {
-        return this._sendToServer("POST", "/cards", {
+        return this._sendDataToServer("POST", "/cards", {
             name: name,
             link: link
         })
     }
 
-    likeCard(){
-
+    likeCard(cardId) {
+        return this._accessServer("PUT", "/cards/likes/" + cardId)
     }
 
-    dislikeCard(){
-        
+    dislikeCard(cardId) {
+        return this._accessServer("DELETE", "/cards/likes/" + cardId)
     }
 
 }
