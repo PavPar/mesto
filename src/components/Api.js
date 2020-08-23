@@ -4,8 +4,8 @@ export default class Api {
     }
 
     errorMsgHandler({ status, statusText }) {
-        console.log('Api.js Status : ' + status)
-        console.log('Api.js MSG : ' + statusText)
+        console.log('Status : ' + status)
+        console.log('MSG : ' + statusText)
     }
 
     //Обращаемся к серверу
@@ -59,6 +59,14 @@ export default class Api {
             name: name,
             link: link
         })
+    }
+
+    likeCard(){
+
+    }
+
+    dislikeCard(){
+        
     }
 
 }

@@ -19,14 +19,16 @@ const cardTemplateSelectors = {
     title: '.card__title',
     image: '.card__image',
     btnLike: '.card__button_type-like',
-    btnDelete: '.card__button_type-delete'
+    btnDelete: '.card__button_type-delete',
+    likeCnt: '.card__like-counter'
 };
 
 export default class Card {
-    constructor(data, templateSelector, handleCardClick) {
+    constructor(data, templateSelector, handleCardClick, handleCardLike) {
         this.data = data;
         this.templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
+        this._cardLikeHandler = handleCardLike.bind(this);
     }
 
     //Установщик данных картчоки
@@ -35,12 +37,14 @@ export default class Card {
         this.image = this.card.querySelector(cardTemplateSelectors.image);
         this.image.src = this.data.src;
         this.image.alt = alt;
+        this.card.querySelector(cardTemplateSelectors.likeCnt).textContent = this.data.likes;
+        console.log(this.data.likes)
     }
 
-    //Обработчик лайка карточки
-    _cardLikeHandler() {
-        this.btnLike.classList.toggle('card__button_state-selected');
-    }
+    // //Обработчик лайка карточки
+    // _cardLikeHandler() {
+    //     this.btnLike.classList.toggle('card__button_state-selected');
+    // }
 
     //Обработчик удаления карточки
     _cardDeleteHandler(target) {
@@ -51,11 +55,12 @@ export default class Card {
 
     //Установка слушателей событий
     _setEventListeners() {
+
         this.btnLike = this.card.querySelector(cardTemplateSelectors.btnLike);
-        this.btnLike.addEventListener('click', () => this._cardLikeHandler());
+        this.btnLike.addEventListener('click', this._cardLikeHandler);
         this.card.querySelector(cardTemplateSelectors.btnDelete)
             .addEventListener('click', (event) => this._cardDeleteHandler(event.target), { once: true });
-        this.image.addEventListener('click',this._handleCardClick);
+        this.image.addEventListener('click', this._handleCardClick);
     }
 
     //Генерация карты 
