@@ -71,6 +71,14 @@
         </div>
     </section>
 
+    <section class="popup popup-confirm popup_visibility-hidden">
+        <form class="popup__window popup_type-confirm" novalidate name="popup__card-form">
+            <h2 class="popup__title popup__title_mod-confirm">Вы уверены?</h2>
+            <button class="popup__button popup__button_type_save" type="submit">Да</button>
+            <button class="popup__button popup__button_type_exit"></button>
+        </form>
+    </section>
+
     <template id="card-template">
         <div class="card">
             <img draggable="false" class="card__image">
@@ -80,6 +88,7 @@
             <button class="card__button card__button_type-delete"></button>
         </div>
     </template>
+
 
 </body>
 
