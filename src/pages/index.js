@@ -26,8 +26,12 @@ const api = new Api({
     }
 });
 
-const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
+const popupConfirm = new PopupWithForm(popupTypeSelectors.popupConfirm, () => {
+    popupConfirm.tagetCard.class.deleteCard(popupConfirm.tagetCard.DOMtarget);
+    popupConfirm.close();
+});
 
+const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
 //Функция для создания карты с изображением 
 function createCard({ _id, name, link, likes }) {
     return new Card({ title: name, src: link, likes: likes.length, _id: _id }, cardTemplateSelector,
@@ -50,6 +54,13 @@ function createCard({ _id, name, link, likes }) {
                     })
                     .catch(err => api.errorMsgHandler(err));
             }
+        },
+        function (event) {
+            popupConfirm.tagetCard = {
+                class: this,
+                DOMtarget: event.target.closest('.card')
+            };
+            popupConfirm.open();
         })
         .generateCard();
 }
@@ -116,6 +127,7 @@ popupProfileValidator.enableValidation();
 popupCard.setEventListeners();
 popupProfile.setEventListeners();
 popupImage.setEventListeners();
+popupConfirm.setEventListeners();
 
 cardsContainer.renderItems();
 

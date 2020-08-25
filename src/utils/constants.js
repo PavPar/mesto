@@ -1,7 +1,8 @@
 const popupTypeSelectors = {
     popupProfile: '.popup-profile',
     popupWImage: ".popup_type-imgZoom",
-    popupCard: '.popup-card'
+    popupCard: '.popup-card',
+    popupConfirm:'.popup-confirm'
 }
 
 const cardTemplateSelector = '#card-template';
