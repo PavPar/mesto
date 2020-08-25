@@ -2,10 +2,11 @@
 @import url(./__button/profile__button.css);
 @import url(./__button/_type/profile__button_type_add.css);
 @import url(./__button/_type/profile__button_type_edit.css);
+@import url(./__button/_type/profile__button_type_pen.css);
 @import url(./__info/profile__info.css);
 @import url(./__title/profile__title.css);
 @import url(./__subtitle/profile__subtitle.css);
-
+@import url(./__avatar-container/profile__avatar-container.css);
 .profile {
     display: flex;
     width: 100%;

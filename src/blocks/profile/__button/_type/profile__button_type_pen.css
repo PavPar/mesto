@@ -1,0 +1,14 @@
+.profile__button_type_pen{
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width:26px;
+    height: 26px;
+    background-image: url(../../../../images/pen.svg);
+    background-size: 26px 26px;
+    border: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.profile__button_type_pen:hover{}

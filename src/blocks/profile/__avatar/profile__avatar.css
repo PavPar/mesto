@@ -2,4 +2,13 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
+    transition: .2s ease-out filter;
+}
+
+.profile__avatar:hover{
+    filter: brightness(50%);
+}
+
+.profile__avatar:hover ~ .profile__button_type_pen{
+    opacity: 100;
 }

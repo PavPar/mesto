@@ -14,7 +14,10 @@
 
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="./images/avatar.png" alt="Жак-Ив Кусто">
+            <div class="profile__avatar-container">
+                <img class="profile__avatar" src="./images/avatar.png" alt="Жак-Ив Кусто">
+                <button class="profile__button profile__button_type_pen"></button>
+            </div>
             <div class="profile__info">
                 <h2 class="profile__title">Жак-Ив Кусто</h2>
                 <p class="profile__subtitle">Исследователь океана</p>
@@ -79,10 +82,10 @@
         </form>
     </section>
 
-    <section class="popup popup-avatar">
-        <form class="popup__window popup_type-avatar popup_visibility-hidden" novalidate name="popup__avatar-form">
+    <section class="popup popup-avatar popup_visibility-hidden">
+        <form class="popup__window popup_type-avatar " novalidate name="popup__avatar-form">
             <h2 class="popup__title">Обновить аватар</h2>
-            
+
             <input class="popup__input popup__input-avatar-link" id="popup__input-avatar-link" type="url" required
                 placeholder="Ссылка на изображение" name="src">
             <label for="popup__input-title" class="popup__errmsg" id="popup__input-avatar-link-errmsg"></label>
