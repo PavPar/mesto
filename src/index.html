@@ -72,9 +72,22 @@
     </section>
 
     <section class="popup popup-confirm popup_visibility-hidden">
-        <form class="popup__window popup_type-confirm" novalidate name="popup__card-form">
+        <form class="popup__window popup_type-confirm" novalidate name="popup__confirm-form">
             <h2 class="popup__title popup__title_mod-confirm">Вы уверены?</h2>
             <button class="popup__button popup__button_type_save" type="submit">Да</button>
+            <button class="popup__button popup__button_type_exit"></button>
+        </form>
+    </section>
+
+    <section class="popup popup-avatar">
+        <form class="popup__window popup_type-avatar popup_visibility-hidden" novalidate name="popup__avatar-form">
+            <h2 class="popup__title">Обновить аватар</h2>
+            
+            <input class="popup__input popup__input-avatar-link" id="popup__input-avatar-link" type="url" required
+                placeholder="Ссылка на изображение" name="src">
+            <label for="popup__input-title" class="popup__errmsg" id="popup__input-avatar-link-errmsg"></label>
+
+            <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
             <button class="popup__button popup__button_type_exit"></button>
         </form>
     </section>
