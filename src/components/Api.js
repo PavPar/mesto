@@ -69,5 +69,8 @@ export default class Api {
         return this._accessServer("DELETE", "/cards/likes/" + cardId)
     }
 
+    deleteCard(cardId){
+        return this._accessServer("DELETE", "/cards/" + cardId)
+    }
 }
 

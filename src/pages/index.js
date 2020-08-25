@@ -27,8 +27,13 @@ const api = new Api({
 });
 
 const popupConfirm = new PopupWithForm(popupTypeSelectors.popupConfirm, () => {
-    popupConfirm.tagetCard.class.deleteCard(popupConfirm.tagetCard.DOMtarget);
-    popupConfirm.close();
+    api.deleteCard(popupConfirm.tagetCard.class.data._id).then((data)=>{
+        console.log(data);
+        popupConfirm.tagetCard.class.deleteCard(popupConfirm.tagetCard.DOMtarget);
+        popupConfirm.close();    
+    })
+    .catch(err => api.errorMsgHandler(err));
+
 });
 
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
