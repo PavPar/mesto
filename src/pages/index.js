@@ -27,11 +27,10 @@ const api = new Api({
 });
 
 const popupConfirm = new PopupWithForm(popupTypeSelectors.popupConfirm, () => {
+    popupConfirm.close();
     api.deleteCard(popupConfirm.tagetCard.class.data._id)
-        .then((data) => {
-            console.log(data);
+        .then(() => {
             popupConfirm.tagetCard.class.deleteCard(popupConfirm.tagetCard.DOMtarget);
-            popupConfirm.close();
         })
         .catch(err => api.errorMsgHandler(err));
 
@@ -39,13 +38,17 @@ const popupConfirm = new PopupWithForm(popupTypeSelectors.popupConfirm, () => {
 
 
 const popupAvatar = new PopupWithForm(popupTypeSelectors.popupAvatar, (inputData) => {
+    const textBefore = popupAvatar.submitBtn.textContent;
+    popupAvatar.setButtonText("Обновление...");
     api.changeUserAvatar(inputData["src"])
         .then(res => {
             profileUserInfo.setUserAvatar(res.avatar);
         })
-        .catch(err => api.errorMsgHandler(err));
-    popupAvatar.close();
-
+        .catch(err => api.errorMsgHandler(err))
+        .finally(() => {
+            popupAvatar.setButtonText(textBefore);
+            popupAvatar.close();
+        });
 })
 
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
@@ -89,12 +92,18 @@ const cardsContainer = new Section({
 }, cardContainerSelector);
 
 const popupCard = new PopupWithForm(popupTypeSelectors.popupCard, (inputData) => {
+    const textBefore = popupCard.submitBtn.textContent;
+    popupCard.setButtonText("Создание...");
+
     api.addNewCard({ name: inputData.title, link: inputData.src })
         .then(res => {
             cardsContainer.addItem(createCard(res));
         })
-        .catch(err => api.errorMsgHandler(err));
-    popupCard.close();
+        .catch(err => api.errorMsgHandler(err))
+        .finally(() => {
+            popupCard.setButtonText(textBefore);
+            popupCard.close();
+        });
 });
 
 const profileUserInfo = new UserInfo({
@@ -104,17 +113,23 @@ const profileUserInfo = new UserInfo({
 });
 
 const popupProfile = new PopupWithForm(popupTypeSelectors.popupProfile, (inputData) => {
+    const textBefore = popupProfile.submitBtn.textContent;
+    popupProfile.setButtonText("Сохранение...");
     // profileUserInfo.setUserInfo(inputData);
     api.changeUserInfo({ name: inputData.userName, about: inputData.userInfo }).then(({ name, about }) => {
         profileUserInfo.setUserInfo({ userName: name, userInfo: about });
     })
-        .catch(err => api.errorMsgHandler(err));
-    popupProfile.close();
+        .catch(err => api.errorMsgHandler(err))
+        .finally(() => {
+            popupProfile.setButtonText(textBefore);
+            popupProfile.close();
+        });
 });
 
 const popupCardValidator = new FormValidator(formValidatorConfig, popupCard.popup.querySelector(formValidatorConfig.formSelector));
 const popupProfileValidator = new FormValidator(formValidatorConfig, popupProfile.popup.querySelector(formValidatorConfig.formSelector));
 const popupAvatarValidator = new FormValidator(formValidatorConfig, popupAvatar.popup.querySelector(formValidatorConfig.formSelector));
+
 
 const profileElements = {
     title: popupProfile.popup.querySelector(profileSelectors.input_title),
@@ -126,8 +141,7 @@ const profileElements = {
 
 profileElements.btnAdd.addEventListener("click", () => {
     popupCardValidator.hideAllValidationMessages();
-
-    popupCard.open()
+    popupCard.open();
 });
 
 profileElements.btnEdit.addEventListener("click", () => {
@@ -160,7 +174,6 @@ cardsContainer.renderItems();
 api.getInitialCards()
     .then(res => {
         res.forEach(data => {
-            console.log(data);
             cardsContainer.addItem(createCard(data))
         });
     })

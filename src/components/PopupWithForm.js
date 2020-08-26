@@ -24,6 +24,7 @@ export default class PopupWithForm extends Popup {
         super(popupSelector);
         this._submitAct = submitAction;
         this._form = this.popup.querySelector(popupSelectorConst.formSelector);
+        this.submitBtn = this.popup.querySelector(popupSelectorConst.submitButtonSelector);
     }
 
     _getInputValues() {
@@ -48,5 +49,9 @@ export default class PopupWithForm extends Popup {
     close() {
         this._form.reset();
         super.close();
+    }
+
+    setButtonText(text){
+        this.submitBtn.textContent = text; 
     }
 }
