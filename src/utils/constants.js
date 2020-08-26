@@ -2,12 +2,25 @@ const popupTypeSelectors = {
     popupProfile: '.popup-profile',
     popupWImage: ".popup_type-imgZoom",
     popupCard: '.popup-card',
-    popupConfirm:'.popup-confirm',
-    popupAvatar:".popup-avatar"
+    popupConfirm: '.popup-confirm',
+    popupAvatar: ".popup-avatar"
 }
 
 const cardTemplateSelector = '#card-template';
 const cardContainerSelector = ".cards";
+
+const cardSelectors = {
+    card: '.card',
+    title: '.card__title',
+    image: '.card__image',
+    btnLike: '.card__button_type-like',
+    btnDelete: '.card__button_type-delete',
+    likeCnt: '.card__like-counter'
+};
+
+const cardClasses = {
+    btnSelected: 'card__button_state-selected'
+}
 
 const formValidatorConfig = {
     formSelector: '.popup__window',
@@ -24,7 +37,7 @@ const profileSelectors = {
     subtitle: ".profile__subtitle",
     input_title: ".popup__input-title",
     input_subtitle: ".popup__input-subtitle",
-    avatar:".profile__avatar"
+    avatar: ".profile__avatar"
 };
 
 const initialCards = [
@@ -60,5 +73,7 @@ export {
     cardContainerSelector,
     formValidatorConfig,
     profileSelectors,
-    initialCards
+    initialCards,
+    cardClasses,
+    cardSelectors
 }

@@ -51,6 +51,7 @@ export default class PopupWithForm extends Popup {
         super.close();
     }
 
+    //Установить текст кнопке submit
     setButtonText(text){
         this.submitBtn.textContent = text; 
     }

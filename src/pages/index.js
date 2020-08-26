@@ -15,7 +15,9 @@ import {
     cardTemplateSelector,
     cardContainerSelector,
     formValidatorConfig,
-    profileSelectors
+    profileSelectors,
+    cardClasses,
+    cardSelectors
 } from '../utils/constants.js';
 
 const api = new Api({
@@ -52,25 +54,25 @@ const popupAvatar = new PopupWithForm(popupTypeSelectors.popupAvatar, (inputData
 })
 
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
-//Функция для создания карты с изображением 
+
 function createCard({ _id, name, link, likes }) {
     return new Card({ title: name, src: link, likes: likes.length, _id: _id }, cardTemplateSelector,
         () => {
             popupImage.open({ title: name, src: link });
         },
         function (event) {
-            if (!event.target.classList.contains('card__button_state-selected')) {
+            if (!event.target.classList.contains(cardClasses.btnSelected)) {
                 api.likeCard(this.data._id)
                     .then(res => {
-                        event.target.classList.toggle('card__button_state-selected');
-                        this.setCardLikes(event.target.closest('.card'), res.likes.length);
+                        event.target.classList.toggle(cardClasses.btnSelected);
+                        this.setCardLikes(event.target.closest( cardSelectors.card), res.likes.length);
                     })
                     .catch(err => api.errorMsgHandler(err));
             } else {
                 api.dislikeCard(this.data._id)
                     .then(res => {
-                        event.target.classList.toggle('card__button_state-selected');
-                        this.setCardLikes(event.target.closest('.card'), res.likes.length);
+                        event.target.classList.toggle(cardClasses.btnSelected);
+                        this.setCardLikes(event.target.closest(cardSelectors.card), res.likes.length);
                     })
                     .catch(err => api.errorMsgHandler(err));
             }
@@ -78,7 +80,7 @@ function createCard({ _id, name, link, likes }) {
         function (event) {
             popupConfirm.tagetCard = {
                 class: this,
-                DOMtarget: event.target.closest('.card')
+                DOMtarget: event.target.closest(cardSelectors.card)
             };
             popupConfirm.open();
         })
@@ -115,7 +117,7 @@ const profileUserInfo = new UserInfo({
 const popupProfile = new PopupWithForm(popupTypeSelectors.popupProfile, (inputData) => {
     const textBefore = popupProfile.submitBtn.textContent;
     popupProfile.setButtonText("Сохранение...");
-    // profileUserInfo.setUserInfo(inputData);
+
     api.changeUserInfo({ name: inputData.userName, about: inputData.userInfo }).then(({ name, about }) => {
         profileUserInfo.setUserInfo({ userName: name, userInfo: about });
     })
@@ -168,8 +170,6 @@ popupProfile.setEventListeners();
 popupImage.setEventListeners();
 popupConfirm.setEventListeners();
 popupAvatar.setEventListeners();
-
-cardsContainer.renderItems();
 
 api.getInitialCards()
     .then(res => {
