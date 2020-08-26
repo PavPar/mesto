@@ -2,7 +2,8 @@ const popupTypeSelectors = {
     popupProfile: '.popup-profile',
     popupWImage: ".popup_type-imgZoom",
     popupCard: '.popup-card',
-    popupConfirm:'.popup-confirm'
+    popupConfirm:'.popup-confirm',
+    popupAvatar:".popup-avatar"
 }
 
 const cardTemplateSelector = '#card-template';
@@ -22,7 +23,8 @@ const profileSelectors = {
     title: ".profile__title",
     subtitle: ".profile__subtitle",
     input_title: ".popup__input-title",
-    input_subtitle: ".popup__input-subtitle"
+    input_subtitle: ".popup__input-subtitle",
+    avatar:".profile__avatar"
 };
 
 const initialCards = [

@@ -40,11 +40,11 @@ export default class Api {
 
 
     getInitialCards() {
-        return this._accessServer("GET","/cards");
+        return this._accessServer("GET", "/cards");
     }
 
     getUserInfo() {
-        return this._accessServer("GET","/users/me");
+        return this._accessServer("GET", "/users/me");
     }
 
     changeUserInfo({ name, about }) {
@@ -69,8 +69,14 @@ export default class Api {
         return this._accessServer("DELETE", "/cards/likes/" + cardId)
     }
 
-    deleteCard(cardId){
+    deleteCard(cardId) {
         return this._accessServer("DELETE", "/cards/" + cardId)
+    }
+
+    changeUserAvatar(url) {
+        return this._sendDataToServer("PATCH", "/users/me/avatar", {
+            avatar: url
+        })
     }
 }
 

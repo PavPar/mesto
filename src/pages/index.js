@@ -27,14 +27,26 @@ const api = new Api({
 });
 
 const popupConfirm = new PopupWithForm(popupTypeSelectors.popupConfirm, () => {
-    api.deleteCard(popupConfirm.tagetCard.class.data._id).then((data)=>{
-        console.log(data);
-        popupConfirm.tagetCard.class.deleteCard(popupConfirm.tagetCard.DOMtarget);
-        popupConfirm.close();    
-    })
-    .catch(err => api.errorMsgHandler(err));
+    api.deleteCard(popupConfirm.tagetCard.class.data._id)
+        .then((data) => {
+            console.log(data);
+            popupConfirm.tagetCard.class.deleteCard(popupConfirm.tagetCard.DOMtarget);
+            popupConfirm.close();
+        })
+        .catch(err => api.errorMsgHandler(err));
 
 });
+
+
+const popupAvatar = new PopupWithForm(popupTypeSelectors.popupAvatar, (inputData) => {
+    api.changeUserAvatar(inputData["src"])
+        .then(res => {
+            profileUserInfo.setUserAvatar(res.avatar);
+        })
+        .catch(err => api.errorMsgHandler(err));
+    popupAvatar.close();
+
+})
 
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
 //Функция для создания карты с изображением 
@@ -87,7 +99,8 @@ const popupCard = new PopupWithForm(popupTypeSelectors.popupCard, (inputData) =>
 
 const profileUserInfo = new UserInfo({
     userNameSelector: profileSelectors.title,
-    userInfoSelector: profileSelectors.subtitle
+    userInfoSelector: profileSelectors.subtitle,
+    userAvatarSelector: profileSelectors.avatar
 });
 
 const popupProfile = new PopupWithForm(popupTypeSelectors.popupProfile, (inputData) => {
@@ -101,12 +114,14 @@ const popupProfile = new PopupWithForm(popupTypeSelectors.popupProfile, (inputDa
 
 const popupCardValidator = new FormValidator(formValidatorConfig, popupCard.popup.querySelector(formValidatorConfig.formSelector));
 const popupProfileValidator = new FormValidator(formValidatorConfig, popupProfile.popup.querySelector(formValidatorConfig.formSelector));
+const popupAvatarValidator = new FormValidator(formValidatorConfig, popupAvatar.popup.querySelector(formValidatorConfig.formSelector));
 
 const profileElements = {
     title: popupProfile.popup.querySelector(profileSelectors.input_title),
     subtitle: popupProfile.popup.querySelector(profileSelectors.input_subtitle),
     btnAdd: document.querySelector(profileSelectors.btnAdd),
-    btnEdit: document.querySelector(profileSelectors.btnEdit)
+    btnEdit: document.querySelector(profileSelectors.btnEdit),
+    avatar: document.querySelector(profileSelectors.avatar)
 }
 
 profileElements.btnAdd.addEventListener("click", () => {
@@ -125,14 +140,20 @@ profileElements.btnEdit.addEventListener("click", () => {
     popupProfile.open();
 });
 
+profileElements.avatar.addEventListener("click", () => {
+    popupAvatarValidator.hideAllValidationMessages();
+    popupAvatar.open();
+})
 
 popupCardValidator.enableValidation();
 popupProfileValidator.enableValidation();
+popupAvatarValidator.enableValidation();
 
 popupCard.setEventListeners();
 popupProfile.setEventListeners();
 popupImage.setEventListeners();
 popupConfirm.setEventListeners();
+popupAvatar.setEventListeners();
 
 cardsContainer.renderItems();
 
@@ -148,5 +169,6 @@ api.getInitialCards()
 api.getUserInfo()
     .then(res => {
         profileUserInfo.setUserInfo({ userName: res.name, userInfo: res.about });
+        profileUserInfo.setUserAvatar(res.avatar);
     })
     .catch(err => api.errorMsgHandler(err));
