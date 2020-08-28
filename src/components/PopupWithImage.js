@@ -10,7 +10,7 @@ const popupConst = {
 }
 
 export default class PopupWithImage extends Popup {
-    constructor(popupSelector, imageData) {
+    constructor(popupSelector) {
         super(popupSelector);
         this._imageElement = this.popup.querySelector(popupConst.imageSelector);
         this._subtitleElement = this.popup.querySelector(popupConst.subtitleSelector);
