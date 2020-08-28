@@ -1,3 +1,5 @@
+import { cardTemplateSelector } from "../utils/constants";
+
 /*
 класс Card
 Cоздаёт карточку с текстом и ссылкой на изображение:
@@ -56,7 +58,7 @@ export default class Card {
     _setEventListeners() {
         this.btnLike = this.card.querySelector(cardTemplateSelectors.btnLike);
         this.btnDelete = this.card.querySelector(cardTemplateSelectors.btnDelete);
-        this.btnLike.addEventListener('click', this._cardLikeHandler);
+        this.btnLike.addEventListener('click', (evt) => { this._cardLikeHandler(this, evt.target) });
         this.btnDelete.addEventListener('click', this._cardDeleteHandler);
         this.image.addEventListener('click', this._handleCardClick);
     }
@@ -83,5 +85,13 @@ export default class Card {
         visible ?
             cardDOM.querySelector(cardTemplateSelectors.btnDelete).classList.remove(cardElementClasses.btnInvisible) :
             cardDOM.querySelector(cardTemplateSelectors.btnDelete).classList.add(cardElementClasses.btnInvisible);
+    }
+
+    isLiked(btn) {
+        return !btn.classList.contains(cardElementClasses.btnSelected);
+    }
+
+    getCardFromElement(element) {
+        return element.closest(cardTemplateSelectors.card);
     }
 }
