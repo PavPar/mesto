@@ -56,7 +56,7 @@ const popupAvatar = new PopupWithForm(popupTypeSelectors.popupAvatar, (inputData
 const popupImage = new PopupWithImage(popupTypeSelectors.popupWImage)
 
 function createCard({ _id, name, link, likes }) {
-    return new Card({ title: name, src: link, likes: likes.length, _id: _id }, cardTemplateSelector,
+    return new Card({ title: name, src: link, likes: likes, _id: _id }, cardTemplateSelector,
         () => {
             popupImage.open({ title: name, src: link });
         },
@@ -65,7 +65,7 @@ function createCard({ _id, name, link, likes }) {
                 api.likeCard(this.data._id)
                     .then(res => {
                         event.target.classList.toggle(cardClasses.btnSelected);
-                        this.setCardLikes(event.target.closest( cardSelectors.card), res.likes.length);
+                        this.setCardLikes(event.target.closest(cardSelectors.card), res.likes.length);
                     })
                     .catch(err => api.errorMsgHandler(err));
             } else {
@@ -84,12 +84,12 @@ function createCard({ _id, name, link, likes }) {
             };
             popupConfirm.open();
         })
-        .generateCard();
+
 }
 
 const cardsContainer = new Section({
     items: [], renderer: (itemData) => {
-        return createCard(itemData);
+        return createCard(itemData).generateCard();;
     }
 }, cardContainerSelector);
 
@@ -99,7 +99,7 @@ const popupCard = new PopupWithForm(popupTypeSelectors.popupCard, (inputData) =>
 
     api.addNewCard({ name: inputData.title, link: inputData.src })
         .then(res => {
-            cardsContainer.addItem(createCard(res));
+            cardsContainer.addItem(createCard(res).generateCard());
         })
         .catch(err => api.errorMsgHandler(err))
         .finally(() => {
@@ -171,17 +171,44 @@ popupImage.setEventListeners();
 popupConfirm.setEventListeners();
 popupAvatar.setEventListeners();
 
-api.getInitialCards()
-    .then(res => {
-        res.forEach(data => {
-            cardsContainer.addItem(createCard(data))
+// api.getInitialCards()
+//     .then(res => {
+//         res.forEach(data => {
+//             cardsContainer.addItem(createCard(data))
+//         });
+//     })
+//     .catch(err => api.errorMsgHandler(err));
+
+// api.getUserInfo()
+//     .then(res => {
+//         profileUserInfo.setUserInfo({ userName: res.name, userInfo: res.about });
+//         profileUserInfo.setUserAvatar(res.avatar);
+//     })
+//     .catch(err => api.errorMsgHandler(err));
+
+
+Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+])
+    .then((values) => {    //попадаем сюда когда оба промиса будут выполнены
+        const [userData, initialCards] = values;
+        profileUserInfo.setUserInfo({ userName: userData.name, userInfo: userData.about });
+        profileUserInfo.setUserAvatar(userData.avatar);
+
+        initialCards.forEach(data => {
+            const cardClass = createCard(data);
+            const card = cardClass.generateCard();
+
+            cardClass.setDeleteButtonVisibility(card, data.owner === userData._id);
+
+            cardClass.setCardLikeState(card, data.likes.some((user) => {
+                return user._id == userData._id;
+            }))
+
+            cardsContainer.addItem(card);
         });
     })
-    .catch(err => api.errorMsgHandler(err));
-
-api.getUserInfo()
-    .then(res => {
-        profileUserInfo.setUserInfo({ userName: res.name, userInfo: res.about });
-        profileUserInfo.setUserAvatar(res.avatar);
+    .catch((err) => {     //попадаем сюда если один из промисов завершится ошибкой
+        console.log(err);
     })
-    .catch(err => api.errorMsgHandler(err));
