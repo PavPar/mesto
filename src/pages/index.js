@@ -200,7 +200,7 @@ Promise.all([
             const cardClass = createCard(data);
             const card = cardClass.generateCard();
 
-            cardClass.setDeleteButtonVisibility(card, data.owner === userData._id);
+            cardClass.setDeleteButtonVisibility(card, data.owner._id === userData._id);
 
             cardClass.setCardLikeState(card, data.likes.some((user) => {
                 return user._id == userData._id;
