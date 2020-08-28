@@ -4,6 +4,8 @@
 @import url(./__button/_type/card__button_type-like.css);
 @import url(./__button/_type/card__button_type-delete.css);
 @import url(./__button/_state/card__button_state-selected.css);
+@import url(./__button/_state/card__button_state-invisible.css);
+
 .card {
     position: relative;
     width: 282px;
